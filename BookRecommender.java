@@ -3,7 +3,7 @@ class BookRecommender{
 
     }
 
-    public void registrazione(){
+    private static void registrazione(){
         File utentiRegistrati = new File(UtentiRegistrati.dati.txt)
         FileWriter fileout = new FileWriter(utentiRegistrati);
         BufferedWriter bw = BufferedWriter(fileout);
