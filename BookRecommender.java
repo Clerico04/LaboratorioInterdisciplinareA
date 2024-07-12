@@ -1,6 +1,6 @@
 import java.io.*;
 
-class BookRecommender{
+public class BookRecommender{
     public static void main(String[] args){
 
     }

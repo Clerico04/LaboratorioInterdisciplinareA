@@ -1,6 +1,6 @@
 import java.io.*;
 
-class Utente{
+public class Utente{
 
     private String nome;
     private String cognome;
@@ -8,6 +8,7 @@ class Utente{
     private String email;
     private String id;
     private String password;
+    private boolean registrato;
 
     public Utente(String nome, String cognome, String cf, String email, String id, String password){
         this.nome = nome;
@@ -16,6 +17,7 @@ class Utente{
         this.email = email;
         this.id = id;
         this.password = password;
+        this.registrato = true;
     }
 
     public Utente(){
@@ -25,6 +27,7 @@ class Utente{
         this.email = "";
         this.id = "";
         this.password = "";
+        this.registrato = false;
     }
 
     private static void cercaLibro(String[] ricerca, char c){
@@ -49,7 +52,7 @@ class Utente{
         
         System.out.println("Risultati della ricerca: \n");
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
+            String line = "";
             while ((line = br.readLine()) != null) {
                 if (isFirstLine) {
                     isFirstLine = false;
@@ -76,5 +79,26 @@ class Utente{
             e.printStackTrace();
         }
     }
+
+    private static void visualizzaLibro(Libro libro){
+        System.out.println("TITOLO: " + libro.titolo + " AUTORE: " + libro.autore + " ANNO PUBBLICAZIONE: " + libro.anno + " EDITORE: " + libro.editore + "VALUTAZIONE: " + libro.votoFinale);
+        boolean dettagli = false;
+        if(!libro.valutato){
+            System.out.println("Il libro non ha ancora ricevuto valutazioni");
+        }else if(dettagli){
+            int[] valutazioni = new int[6];
+            valutazioni = libro.leggiValutazione(libro.titolo);
+            System.out.println("STILE: " + valutazioni[1] + "CONTENUTO: " + valutazioni[2] + "GRADEVOLEZZA: " + valutazioni[3] + "ORIGINALITA': " + valutazioni[4] + "EDIZIONE: " + valutazioni[5]);
+        }
+        if(!libro.consigliato){
+            System.out.println("I lettori non hanno ancora consigliato nessun libro");
+        }else{
+            System.out.println("I lettori consigliano: ");
+            String[] consigli = libro.leggiConsigli(libro.titolo);
+            for(int i=0; i<consigli.length(); i++){
+                System.out.println(consigli[i]);
+            }
+        }
+              
     }
 }
