@@ -1,28 +1,52 @@
 import java.io.*;
 
 public class Consigli{
-    private NodoLibro radice;
+    private Nodo radice;
 
     public Consigli(){
         radice = null;
     }
 
-    private void inserisciConsiglio(Nodo nodoCorrente; String consiglio, String titoloLibro){
-        Nodo controVento = nodoCorrente;
-        boolean primaVolta = true;
-        while((controVento.destro!=null) || (primaVolta)){   
-            primaVolta = false;
-            if(controVento.destro==null){
-                Nodo nuovo = new NodoConsiglio(consiglio, null);
-                controVento.setDestro(nuovo); 
-                break;
-            }else{
-                controVento = controVento.destro;
-                if(controVento.titolo.equals(consiglio)){
-                    controVento.setNumeroConsigli(controVento.nConsigli++);
-                    break;
-            }
-            }
-        }   
+
+    private Nodo returnRadice(){
+        return radice;
     }
-}
+
+    private void inserisciConsiglio(Nodo nodoCorrente; Libro consiglio){
+        if(nodoCorrente.destro == null){
+            nodoCorrente.destro=new Nodo (consiglio, null, null);
+            nodoCorrente.destro.setNumeroConsigli(1);
+        }else{
+            while((nodoCorrente.destro!=null) & !(nodoCorrente.libro.equals(consiglio))){ 
+                    nodoCorrente = nodoCorrente.destro; 
+                }
+                if(nodoCorrente.libro.equals(consiglio)){
+                    nodoCorrente.setNumeroConsigli(nConsigli++);
+                }else{
+                    nodoCorrente.destro = new NodoConsiglio(consiglio, null);
+                    nodoCorrente.destro.setNumeroConsigli(1);
+                }
+                }
+            }
+
+            
+            private Nodo scorriAlbero(Libro nuovo){
+                if(radice==null){
+                    radice = new Nodo(nuovo,null,null);
+                }else{
+                    Nodo i = radice;
+                    while(!(i.libro.equals(nuovo)) && (i.sinistro!=null)){
+                        i = i.sinistro;
+                    }
+                    if(i.libro.equals(nuovo)){
+                        return i;
+                    }else{
+                         i.sinistro = new Nodo(libro, null, null);
+                        return i.sinistro;
+                    }
+                }
+            } 
+}  
+    
+
+

@@ -24,6 +24,10 @@ public class Libro{
         this.editore = "";
     }
 
+    private boolean equals(Libro homosexual){
+        return ((this.titolo.equals(homosexual.titolo)) && (this.autore.equals(homosexual.autore)) && (this.anno==homosexual.anno) && (this.editore.equals(homosexual.editore)));
+    }
+
     private static Int[] leggiValutazione(String titolo){
         int[] valutazioni = new int[6];
 
@@ -65,29 +69,21 @@ public class Libro{
     }
 
     private static String[] leggiConsigli(String titolo){
-        String filePath = new File("ConsigliLibri.dati.csv").getAbsolutePath();
-        boolean isFirsLine = true;
-        if(!consigliato){
-            String[] vuoto = new String[1];
-            vuoto[0] = "Non ci sono ancora libri consigliati per questo libro";
-            return vuoto;
-        }else{
-            try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
-                String line = "";
-                while((line = br.readLine() != null)){
-                    if(isfirstLine){
-                        isFirstLine = false;
-                        continue;
-                    }
-                    
-                    String[] consigli = line.split(";");
-                    String titoloLibro = consigli[0];
-
-                    if(titoloLibro.equals(titolo)){
-                        return consigli;
-                    }
-                }
+         Nodo nodoCorrente = returnRadice();
+         if(nodoCorrente == null){
+            System.out.println("Nessun consiglio per questo libro");
+         }else{
+            while(!(nodoCorrente.titolo.equals(titolo)) && (nodoCorrente.sinistro!=null)){
+                nodoCorrente = nodoCorrente.sinistro;
             }
-        }
+            if(nodoCorrente.titolo.equals(titolo)){
+                System.out.println("Libri consigliati in base alla tua lettura:");
+                while(nodoCorrente!=null){
+                    System.out.println("TITOLO: " + nodoCorrente.titolo + "NUMERO CONSIGLI: " + nodoCorrente.nConsigli);
+                }
+            }else{
+                System.out.println("Nessun consiglio per questo libro");
+            }
+         }
     }
 }
