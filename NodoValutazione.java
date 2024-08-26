@@ -1,56 +1,52 @@
-import java.io.*;
+jhimport java.io.*;
 import java.util.ArrayList;
 
 public class NodoValutazione{
     private Libro libro;
-    private int stile;
+    private int[] stile = new int[2];
     ArrayList<String> noteStile = new ArrayList<String>();
-    private int contenuto;
+    private int[] contenuto = new int[2];
     ArrayList<String> noteContenuto = new ArrayList<String>();
-    private int gradevolezza;
+    private int[] gradevolezza = new int[2];
     ArrayList<String> noteGradevolezza = new ArrayList<String>();
-    private int originalita;
+    private int[] originalita = new int[2];
     ArrayList<String> noteOriginalita = new ArrayList<String>();
-    private int edizione;
+    private int[] edizione = new int[2];
     ArrayList<String> noteEdizione = new ArrayList<String>();
-    private int votoFinale;
+    private int[] votoFinale = new int[2];
     ArrayList<String> noteVotoFinale = new ArrayList<String>();
-    private int nValutazioni;
     
     private NodoValutazione destro;
     private NodoValutazione sinistro;
 
-    public NodoValutazione(Libro libro, int stile, int contenuto, int gradevolezza, int originalita, int edizione, int votoFinale, Nodo destro, Nodo sinistro){
-        this.libro = libro;
-        this.stile = stile;
-        this.contenuto = contenuto;
-        this.gradevolezza = gradevolezza;
-        this.originalita = originalita;
-        this.edizione = edizione;
-        this.votoFinale = votoFinale;
-        this.nValutazioni = 0;
+    public NodoValutazione(Libro libro, int[] stile, int[] contenuto, int[] gradevolezza, int[] originalita, int[] edizione, int[] votoFinale, Nodo destro, Nodo sinistro){
+        for(int i = 0; i<2; i++){
+            this.stile[i] = stile[i];
+            this.contenuto[i] = contenuto[i];
+            this.gradevolezza[i] = gradevolezza[i];
+            this.originalita[i] = originalita[i];
+            this.edizione[i] = edizione[i];
+            this.votoFinale[i] = votoFinale[i];
+        }
+        this.libro= libro;
         this.destro = destro;
         this.sinistro = sinistro;
     }
 
     public Nodo(){
         this.libro = null;
-        this.stile = 0;
-        this.contenuto = 0;
-        this.gradevolezza = 0;
-        this.originalita = 0;
-        this.edizione = 0;
-        this.votoFinale = 0;
-        this.nValutazioni = 0;
+        this.stile = null;
+        this.contenuto = null;
+        this.gradevolezza = null;
+        this.originalita = null;
+        this.edizione = null;
+        this.votoFinale = null;
+        this.nValutazioni = null;
         this.destro = null;
         this.sinistro = null;
     }
 
-    private void setNumeroValutazioni(int nValutazioni){
-        this.nConsigli = nValutazioni;
-    }
-
-
+    
     private void setDestro(NodoValutazione destro){
         this.destro = destro;
     }

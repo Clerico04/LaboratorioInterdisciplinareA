@@ -69,10 +69,12 @@ public class Utente{
                 if(colonne.length==1){
                     if(columns[colonne[0]].contains(ricerca[0]))
                         System.out.println("TITOLO: " + titolo + " AUTORE: " + autore + " ANNO PUBBLICAZIONE: " + annoFile + " EDITORE: " + editore);
+                        Libro libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
                 }else{
                     if((autore.contains(ricerca[0]))&&((annoFile == annoCercato)))
                         System.out.println("TITOLO: " + titolo + " AUTORE: " + autore + " ANNO PUBBLICAZIONE: " + annoFile + " EDITORE: " + editore);
-                }
+                        Libro libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                } 
 
             }
         } catch (IOException e) {
@@ -100,5 +102,23 @@ public class Utente{
             }
         }
               
+    }
+
+    private void registraLibreria(){
+        if(this.registrato){
+            File librerie = new File(Librerie.dati.csv);
+            FileWriter fileout = new FileWriter(librerie);
+            BufferedWriter bw = new BufferedWriter(fileout);
+            System.out.print("Come vuoi chiamare la libreria? (vai a capo per terminare): \n");
+            String nomeLibreria = Input.readLine();
+            bw.write(this.id + ";");
+            bw.write(nomeLibreria + ";");
+
+            
+            bw.flush();
+            bw.close();
+        }else{
+            registrazione();
+        }
     }
 }

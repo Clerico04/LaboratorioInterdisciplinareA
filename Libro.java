@@ -28,47 +28,33 @@ public class Libro{
         return ((this.titolo.equals(homosexual.titolo)) && (this.autore.equals(homosexual.autore)) && (this.anno==homosexual.anno) && (this.editore.equals(homosexual.editore)));
     }
 
-    private static Int[] leggiValutazione(String titolo){
-        int[] valutazioni = new int[6];
+    private String stampaLibro(){
+        return("TITOLO: " + this.titolo + " AUTORE: " + this.autore + " ANNO PUBBLICAZIONE: " + this.anno + " EDITORE: " + this.editore);
+    }
 
-        for(int i = 0; i < 6; i++){
-            valutazioni[i] = 0;
-        }
+    private static void leggiValutazione(Libro libro){
+        NodoValutazione nodoCorrente = findNode(libro);
+         if(nodoCorrente == null){
+            System.out.println("Nessuna valutazione per questo libro");
+         }else{
+            stampaValutazioni("Stile: ", nodoCorrente.stile);
+            stampaValutazioni("Contenuto: ", nodoCorrente.contenuto);
+            stampaValutazioni("Gradevolezza: ", nodoCorrente.gradevolezza);
+            stampaValutazioni("Originalita: ", nodoCorrente.originlita);
+            stampaValutazioni("Edizione: ", nodoCorrente.edizione);
+            stampaValutazioni("Voto finale: ", nodoCorrente.votoFinale);
+         }
+    }
 
-        if(!valutato){
-            return valutazioni;
+    private static void stampaValutazioni(String s, int[] mark){
+        if(mark[1]!=0){
+            System.out.println(s + (mark[0]/mark[1]) + "voti: "+ mark[1]);
         }else{
-            String filePath = new File("Valutazione.dati.csv").getAbsolutePath();
-            boolean isFirstLine = true;
-            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-                String line = "";
-                while((line = br.readLine()) != null){
-                    if (isFirstLine) {
-                    isFirstLine = false;
-                    continue;
-                    }
-
-                    String[] columns = line.split(";");
-                    String titoloLibro = columns[0];
-                    valutazioni[1] = Integer.parseInt(columns[1]);
-                    valutazioni[2] = Integer.parseInt(columns[2]);
-                    valutazioni[3] = Integer.parseInt(columns[3]);
-                    valutazioni[4] = Integer.parseInt(columns[4]);
-                    valutazioni[5] = Integer.parseInt(columns[5]);
-                    valutazioni[0] = Integer.parseInt(columns[6]);
-
-                    if(titoloLibro.equals(titolo)){
-                        return valutazioni;
-                    }
-
-                } 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            System.out.println(s + "non ancora valutato");
         }
     }
 
-    private static String[] leggiConsigli(String titolo){
+    private static void leggiConsigli(Libro communist){
          Nodo nodoCorrente = returnRadice();
          if(nodoCorrente == null){
             System.out.println("Nessun consiglio per questo libro");

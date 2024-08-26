@@ -45,8 +45,21 @@ public class Consigli{
                         return i.sinistro;
                     }
                 }
+            }
+
+            private static Nodo trovaNodo(Libro ricercato){
+                if(radice==null){
+                    return null;
+                }else{
+                    Nodo i = radice;
+                    while(!(i.libro.equals(ricercato)) && (i.sinistro!=null)){
+                        i = i.sinistro;
+                    }
+                    if(i.libro.equals(ricercato)){
+                        return i;
+                    }else{
+                        return null;
+                    }
+                }
             } 
-}  
-    
-
-
+} 
