@@ -120,5 +120,9 @@ public class Utente{
         }else{
             registrazione();
         }
+
+    private static boolean getRegistrato(){
+        return registrato;
+    }
     }
 }

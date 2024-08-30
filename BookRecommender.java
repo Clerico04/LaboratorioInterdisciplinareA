@@ -29,8 +29,8 @@ public class BookRecommender{
         } 
     }
 
-    private static void registrazione() throws IOException{
-        File utentiRegistrati = new File(UtentiRegistrati.dati.txt)
+    public static void registrazione() throws IOException{
+        File utentiRegistrati = new File(UtentiRegistrati.dati.txt);
         FileWriter fileout = new FileWriter(utentiRegistrati);
         BufferedWriter bw = new BufferedWriter(fileout);
         System.out.print("Inserisci il nome (vai a capo per terminare):\n");
@@ -57,7 +57,7 @@ public class BookRecommender{
         bw.close();
     }
 
-    private static Utente login(){
+    public static Utente login(){
         System.out.print("Inserisci il nome utente (vai a capo per terminare): \n");
         String id = Input.readLine();
         System.out.print("Inserisci la tua password (vai a capo per terminare): \n");
@@ -76,7 +76,7 @@ public class BookRecommender{
 
                 String[] columns = line.split(";");
                 if((id.equals(columns[4])) && (password.equals(columns[5]))){
-                   Utente u = new Utente(columns[0]; columns[1]; columns[2]; columns[3]; columns[4]; columns[5];)
+                   Utente u = new Utente(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
                    return u;
                 }else{
                     Utente u = new Utente();
