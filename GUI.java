@@ -6,10 +6,12 @@ import java.io.*;
 public class GUI implements ActionListener{
 	
 	JLabel titolo;
+	JFrame home;
 	
 	public GUI(){
-		JFrame home = new JFrame("Home");
+		home = new JFrame("Home");
         home.setSize(1920, 1080); 
+		home.setLayout(new FlowLayout(FlowLayout.CENTER));
         
         titolo = new JLabel();
         JPanel titoloCentrato = new JPanel();
@@ -23,6 +25,9 @@ public class GUI implements ActionListener{
 		login.addActionListener(this);
 		logRegPiccoli.add(login, BorderLayout.NORTH);
 
+		JButton cercaLibro = new JButton("Cerca Libro");
+		cercaLibro.addListener(this);
+		home.add(cercaLibro);
 		
 		JButton registrazione = new JButton("Registrazione");
 		registrazione.addActionListener(this);
@@ -35,8 +40,9 @@ public class GUI implements ActionListener{
 	}
 	
 	public GUI(Utente utente){
-		JFrame home = new JFrame("Home");
+		home = new JFrame("Home");
         home.setSize(1920, 1080); 
+		home.setLayout(new FlowLayout(FlowLayout.CENTER));
         
         titolo = new JLabel();
         JPanel titoloCentrato = new JPanel();
@@ -44,6 +50,10 @@ public class GUI implements ActionListener{
         titolo.setText("Book recommender by Alessando Monaci e Luca Clerici");
         titoloCentrato.add(titolo, BorderLayout.CENTER);
         home.add(titoloCentrato, BorderLayout.NORTH);
+		
+		JButton cercaLibro = new JButton("Cerca Libro");
+		cercaLibro.addListener(this);
+		home.add(cercaLibro);
 		
 		JLabel registrato = new JLabel();
 		registrato.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -63,9 +73,11 @@ public class GUI implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 		JButton pulsante = (JButton)e.getSource();
         if(pulsante.getText() == "Login"){
-				System.out.println("Cazzo");
+				Login log = new Login();
 			}else if (pulsante.getText() == "Registrazione"){
-				System.out.println("Culo");
+				Registrazione reg = new Registrazione();
+			}else if(pulsante.getText() == "Cerca Libro"){
+				CercaLibro search = new CercaLibro();
 			}
 	}
 }

@@ -33,6 +33,7 @@ public class BookRecommender{
         File utentiRegistrati = new File(UtentiRegistrati.dati.txt);
         FileWriter fileout = new FileWriter(utentiRegistrati);
         BufferedWriter bw = new BufferedWriter(fileout);
+        
         System.out.print("Inserisci il nome (vai a capo per terminare):\n");
         String nome = Input.readLine();
         bw.write(nome + ";");

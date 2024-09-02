@@ -21,14 +21,20 @@ public class Login implements ActionListener{
 		login.add(domanda);
 		
 		JPanel entrata = new JPanel();
-		nome = new JTextField();
-		password = new JTextField();
+		nome = new JTextField(20);
+		password = new JTextField(20);
 		entrata.add(nome, BorderLayout.NORTH);
 		entrata.add(password, BorderLayout.CENTER);
 		login.add(nome);
 		login.add(password);
 		
+
+		JButton homeL = new JButton("Home");
+		JPanel homeP = new JPanel();
 		JButton entra = new JButton("Login");
+		homeL.addListener(this);
+		homeP.add(homeL, BorderLayout.CENTER);
+		login.add(homeP);
 		entra.addListener(this);
 		entrata.add(entra, BorderLayout.SOUTH);
 		login.add(entrata);
@@ -44,31 +50,40 @@ public class Login implements ActionListener{
 	@Override
     public void actionPerformed(ActionEvent e) throws IOException{
 			JButton pulsante = (JButton)e.getSource();
-			String id = nome.getText();
-			String password = password.getText();
-			
-			String filePath = new File("UtentiRegistrati.dati.txt").getAbsolutePath();
-			boolean isFirstLine = true;
-			
-			try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-				String line;
-				while ((line = br.readLine()) != null) {
-					if (isFirstLine) {
-						isFirstLine = false;
-						continue;
-					}
 
-					String[] columns = line.split(";");
-					if((id.equals(columns[4])) && (password.equals(columns[5]))){
-					   Utente utente = new Utente(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
-					   GUI gui = new GUI(utente);
-					}else{
-						DUE BOTTONI, RITENTA LOGIN O REGISTRATI
+
+			if(pulsante.getText().equals("Login")){
+				String id = nome.getText();
+				String password = password.getText();
+				String filePath = new File("UtentiRegistrati.dati.txt").getAbsolutePath();
+				boolean isFirstLine = true;
+				
+				try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+					String line;
+					while ((line = br.readLine()) != null) {
+						if (isFirstLine) {
+							isFirstLine = false;
+							continue;
+						}
+
+						String[] columns = line.split(";");
+						if((id.equals(columns[4])) && (password.equals(columns[5]))){
+							Utente utente = new Utente(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
+							GUI gui = new GUI(utente);
+						}else{
+							nome.setText("");
+							password.setText("");
+							JLabel sbagliato = new JLabel("Nome utente o password errati");
+							login.add(sbagliato);
+						}
+						
 					}
-					
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
+			}else{
+				GUI homePage = new GUI();
+			}
+
 	}
 }
