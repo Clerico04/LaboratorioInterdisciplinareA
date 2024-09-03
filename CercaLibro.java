@@ -11,9 +11,17 @@ public class cercaLibro implements ActionListener{
     JTextField autoreA;
     JTextField anno;
     JFrame frame;
+    Utente u;
 
-	public CercaLibro(){
-		
+    public CercaLibro(){
+        frame = new JFrame("Cerca Libro");
+		frame.setSize(990, 540);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+	public CercaLibro(Utente utente){
+		u = utente;
+        
         frame = new JFrame("Cerca Libro");
 		frame.setSize(990, 540);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -91,7 +99,7 @@ public class cercaLibro implements ActionListener{
                         }
                     }
                     if(!(risultati.isEmpty())){
-                        ListaLibri l = new ListaLibri(risultati);                       
+                        ListaLibri l = new ListaLibri(risultati, u);                       
                     }else{
                         JLabel label = new JLabel("Nessun risultato prodotto");
                         frame.add(label); 
@@ -123,7 +131,7 @@ public class cercaLibro implements ActionListener{
                         }
                     }
                     if(!(risultati.isEmpty())){
-                        ListaLibri l = new ListaLibri(risultati);
+                        ListaLibri l = new ListaLibri(risultati, u);
                     }else{
                         JLabel label = new JLabel("Nessun risultato prodotto");
                         frame.add(label); 
@@ -155,7 +163,7 @@ public class cercaLibro implements ActionListener{
                         }
                     }
                     if(!(risultati.isEmpty())){
-                        ListaLibri l = new ListaLibri(risultati);
+                        ListaLibri l = new ListaLibri(risultati, u);
                     }else{
                         JLabel label = new JLabel("Nessun risultato prodotto");
                         frame.add(label); 
@@ -165,7 +173,11 @@ public class cercaLibro implements ActionListener{
                     e.printStackTrace();
                 }
             }else{
-                GUI casa = new GUI();
+                if(utente.getRegistrato()){
+                    GUI casa = new GUI(utente);
+                }else{
+                    GUI casa = new GUI();
+                }  
             }
 	}
 }

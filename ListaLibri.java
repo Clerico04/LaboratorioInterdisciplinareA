@@ -9,6 +9,7 @@ public class ListaLibri implements ActionListener{
     JLabel libretto;
     ArrayList<Libro> listone;
     int i = 0;
+    Utente u;
 
 	public ListaLibri(){
 		JFrame finestra = new JFrame("Login");
@@ -17,7 +18,9 @@ public class ListaLibri implements ActionListener{
 		finestra.setVisible(true);
 	}
 
-    public ListaLibri(ArrayList<Libro> arg){
+    public ListaLibri(ArrayList<Libro> arg, Utente utente){
+        u = utente;
+
 		JFrame finestra = new JFrame("Login");
 		finestra.setSize(990, 540);
 		finestra.setDeaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -71,10 +74,13 @@ public class ListaLibri implements ActionListener{
                     libretto.setText(l.stampaLibro);	
 			    }
             }else if(pulsante.getText().equals("Visualizza Libro")){
-                visualizzaLibro v = new visualizzaLibro();
+                VisualizzaLibro v = new VisualizzaLibro(u, listone.get(i));
             }else{
-                GUI homePage = new GUI();
+                if(u.getRegistrato()){
+                    GUI homePage = new GUI(u);
+                }else{
+                    GUI homePage = new GUI();
+                }
             }
-    
     }
 }

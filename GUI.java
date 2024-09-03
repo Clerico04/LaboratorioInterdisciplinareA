@@ -7,8 +7,11 @@ public class GUI implements ActionListener{
 	
 	JLabel titolo;
 	JFrame home;
+	Utente u;
 	
 	public GUI(){
+		u= new Utente();
+
 		home = new JFrame("Home");
         home.setSize(1920, 1080); 
 		home.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -40,6 +43,8 @@ public class GUI implements ActionListener{
 	}
 	
 	public GUI(Utente utente){
+		u = utente;
+		
 		home = new JFrame("Home");
         home.setSize(1920, 1080); 
 		home.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -77,7 +82,7 @@ public class GUI implements ActionListener{
 			}else if (pulsante.getText() == "Registrazione"){
 				Registrazione reg = new Registrazione();
 			}else if(pulsante.getText() == "Cerca Libro"){
-				CercaLibro search = new CercaLibro();
+				CercaLibro search = new CercaLibro(u);	
 			}
 	}
 }
