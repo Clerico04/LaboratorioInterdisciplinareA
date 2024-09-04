@@ -12,6 +12,7 @@ public class cercaLibro implements ActionListener{
     JTextField anno;
     JFrame frame;
     Utente u;
+    Libreria libreria;
 
     public CercaLibro(){
         frame = new JFrame("Cerca Libro");
@@ -19,8 +20,60 @@ public class cercaLibro implements ActionListener{
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
+	public CercaLibro(Utente utente, Libreria l){
+		u = utente;
+        libreria=l;
+
+        frame = new JFrame("Cerca Libro");
+		frame.setSize(990, 540);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+
+        titolo = new JTextField(50);
+        autore = new JTextField(50);
+        autoreA = new JTextField(50);
+        anno = new JTextField(4);
+
+        JPanel piccolo1 = new JPanel();
+        JPanel piccolo2 = new JPanel();
+        JPanel piccolo3 = new JPanel();
+        
+        JButton rT = new JButton("RicercaTitolo");
+        rt.addListener(this);
+        JButton rA = new JButton("RicercaAutore");
+        rA.addListener(this);
+        JButton rAA = new JButton("RicercaAutAnno");
+        rAA.addListener(this);
+
+        piccolo3.add(autoreA, BorderLayout.WEST);
+        piccolo3.add(anno, BorderLayout.CENTER);
+        piccolo3.add(rAA, BorderLayout.EAST);
+
+        piccolo1.add(titolo, BorderLayout.WEST);
+        piccolo1.add(rT, BorderLayout.EAST);
+
+        piccolo2.add(autore, BorderLayout.WEST);
+        piccolo2.add(rA, BorderLayout.EAST);
+
+        panel.add(piccolo1, BorderLayout.NORTH);
+        panel.add(piccolo2, BorderLayout.CENTER);
+        panel.add(piccolo3, BorderLayout.SOUTH);
+        
+        JButton homeC = new JButton("Home");
+        homeC.addListener(this);
+
+        frame.add(panel);
+        frame.add(homeC);
+        	
+		frame.setVisible(true);
+		
+	}
+
+
 	public CercaLibro(Utente utente){
 		u = utente;
+        libreria = null;
         
         frame = new JFrame("Cerca Libro");
 		frame.setSize(990, 540);

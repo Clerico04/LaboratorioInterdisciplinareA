@@ -21,12 +21,12 @@ public class GUI implements ActionListener{
         titolo.setFont(new Font("Arial", Font.BOLD, 45));
         titolo.setText("Book recommender by Alessando Monaci e Luca Clerici");
         titoloCentrato.add(titolo, BorderLayout.CENTER);
-        home.add(titoloCentrato, BorderLayout.NORTH);
+        home.add(titoloCentrato, BorderLayout.APPLET);
 		
 		JButton login = new JButton("Login");
 		JPanel logRegPiccoli = new JPanel();
 		login.addActionListener(this);
-		logRegPiccoli.add(login, BorderLayout.NORTH);
+		logRegPiccoli.add(login, BorderLayout.WEST);
 
 		JButton cercaLibro = new JButton("Cerca Libro");
 		cercaLibro.addListener(this);
@@ -34,8 +34,14 @@ public class GUI implements ActionListener{
 		
 		JButton registrazione = new JButton("Registrazione");
 		registrazione.addActionListener(this);
-		logRegPiccoli.add(registrazione, BorderLayout.SOUTH);
-		home.add(logRegPiccoli);
+		logRegPiccoli.add(registrazione, BorderLayout.CENTER);
+
+		JButton library = new JButton("Librerie");
+		library.addActionListener(this);
+		logRegPiccoli.add(library, BorderLayout.EAST);
+		
+		
+		home.add(logRegPiccoli, BorderLayout.NORTH);
         
         home.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,14 +62,22 @@ public class GUI implements ActionListener{
         titoloCentrato.add(titolo, BorderLayout.CENTER);
         home.add(titoloCentrato, BorderLayout.NORTH);
 		
+		JPanel logRegPiccoli = new JPanel();
+		
 		JButton cercaLibro = new JButton("Cerca Libro");
 		cercaLibro.addListener(this);
-		home.add(cercaLibro);
+		logRegPiccoli.add(cercaLibro, BorderLayout.CENTER);
 		
 		JLabel registrato = new JLabel();
 		registrato.setFont(new Font("Arial", Font.PLAIN, 15));
 		registrato.setText("Login efettuato con successo!");
+
+		JButton library = new JButton("Librerie");
+		library.addActionListener(this);
+		logRegPiccoli.add(library, BorderLayout.EAST);
+		
 		home.add(registrato);
+		home.add(logRegPiccoli);
 		
         home.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +97,15 @@ public class GUI implements ActionListener{
 				Registrazione reg = new Registrazione();
 			}else if(pulsante.getText() == "Cerca Libro"){
 				CercaLibro search = new CercaLibro(u);	
+			}else if(pulsante.getText() == "Librerie"){
+				if(u.getRegistrato()){
+					LibreriaGUI puzzo = new LibreriaGUI(u);
+				}else{
+					JLabel registrati = new JLabel();
+					registrati.setFont(new Font("Arial", Font.ITALIC, 15));
+					registrati.setText("Librerie accessibili solo agli utenti registrati e loggati, registrati e accedi per utilizzare questa funzione");
+					home.add(registrati);
+				}
 			}
 	}
 }

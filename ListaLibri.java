@@ -17,7 +17,7 @@ public class ListaLibri implements ActionListener{
 		finestra.setDeaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		finestra.setVisible(true);
 	}
-
+    
     public ListaLibri(ArrayList<Libro> arg, Utente utente){
         u = utente;
 

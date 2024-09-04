@@ -85,4 +85,8 @@ public class Libro{
         }
         return string;
     }
+
+    private String getTitolo(){
+        return this.titolo;
+    }
 }

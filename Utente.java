@@ -48,7 +48,11 @@ public class Utente{
         }
     }
 
-    private static boolean getRegistrato(){
-        return registrato;
+    private  boolean getRegistrato(){
+        return this.registrato;
+    }
+
+    private  String getId(){
+        return this.id;
     }
 }

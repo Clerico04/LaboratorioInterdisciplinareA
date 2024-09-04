@@ -5,51 +5,54 @@ import java.awt.*;
 import java.util.*;
 
 public class Liberia{
-    
-    Utente u;
+
+    private String titolo;
+    private Libro[] libroni;
 
     public Libreria(){
-        JFrame f = new JFrame();
+        titolo="";
+        libroni = null;
     }
 
-    public Libreria (Utente utente){
-        u = utente;
-
-        JFrame frameL = new JFrame("Cerca Libro");
-		frameL.setSize(990, 540);
-		frameL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
-
-        JButton homeL = new JButton("Home");
-        JButton creazione = new JButton("Crea Libreria");
-        JPanel panel = new JPanel();
-        homeL.addListener(this);
-        panel.add(homeL, BorderLayout.WEST);
-        panel.add(creazione, BorderLayout.EAST);
-        frameL.add(panel, BorderLayout.NORTH);
-        
-
-
-        frameL.setVisible(true);
+    public Libreria(String titolo, Libro[] libroni){
+        this.titolo= titolo;
+        this.libroni = libroni;
     }
-  
-      
-    public static void main(String[] args){
-        Libreria libreria = new Libreria();
-   }
-    
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-		JButton pulsante = (JButton)e.getSource();
-        if(pulsante.getText == ){
 
-        }else{
-            if(u.getRegistrato()){
-                GUI home = new GUI(u);
-            }else{
-                GUI home = new GUI();
-            }
-        }
-	}
+    private String getTitolo(){
+        return this.titolo;
+    }
+
+    private static Libreria getLibreria(String nomeLibreria, String username){
+        String filePath = new File("Librerie.dati.csv").getAbsolutePath();
+		boolean isFirstLine = true;
+        Libro[] libri;
+        Libreria l;
+				
+		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				if (isFirstLine) {
+					isFirstLine = false;
+					continue;
+				}
+
+				String[] columns = line.split(";");
+				if((columns[0].equals(username))&&(columns[1].equals(nomeLibreria))){
+                    libri = new Libro[columns.length-2];
+                    for(i=0;i<(columns.length-2),i++){
+                        libri[i]=columns[i+2];
+                    }
+					l = new Libreria(nomeLibreria, libri);
+				}	
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        return l; 
+    }
+
+    private Libro[] getElencoLibri(){
+        return this.libroni;
+    }
 }
