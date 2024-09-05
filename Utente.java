@@ -34,7 +34,7 @@ public class Utente{
         return this.registrato;
     }
 
-    private  String getId(){
+    public  String getId(){
         return this.id;
     }
 }

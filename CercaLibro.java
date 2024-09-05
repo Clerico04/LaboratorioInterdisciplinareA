@@ -40,11 +40,11 @@ public class CercaLibro implements ActionListener{
         JPanel piccolo3 = new JPanel();
         
         JButton rT = new JButton("RicercaTitolo");
-        rt.addListener(this);
+        rT.addActionListener(this);
         JButton rA = new JButton("RicercaAutore");
-        rA.addListener(this);
+        rA.addActionListener(this);
         JButton rAA = new JButton("RicercaAutAnno");
-        rAA.addListener(this);
+        rAA.addActionListener(this);
 
         piccolo3.add(autoreA, BorderLayout.WEST);
         piccolo3.add(anno, BorderLayout.CENTER);
@@ -61,7 +61,7 @@ public class CercaLibro implements ActionListener{
         panel.add(piccolo3, BorderLayout.SOUTH);
         
         JButton homeC = new JButton("Home");
-        homeC.addListener(this);
+        homeC.addActionListener(this);
 
         frame.add(panel);
         frame.add(homeC);
@@ -91,11 +91,11 @@ public class CercaLibro implements ActionListener{
         JPanel piccolo3 = new JPanel();
         
         JButton rT = new JButton("RicercaPerTitolo");
-        rt.addListener(this);
+        rT.addActionListener(this);
         JButton rA = new JButton("RicercaPerAutore");
-        rA.addListener(this);
+        rA.addActionListener(this);
         JButton rAA = new JButton("RicercaPerAutAnno");
-        rAA.addListener(this);
+        rAA.addActionListener(this);
 
         piccolo3.add(autoreA, BorderLayout.WEST);
         piccolo3.add(anno, BorderLayout.CENTER);
@@ -112,7 +112,7 @@ public class CercaLibro implements ActionListener{
         panel.add(piccolo3, BorderLayout.SOUTH);
         
         JButton homeC = new JButton("Home");
-        homeC.addListener(this);
+        homeC.addActionListener(this);
 
         frame.add(panel);
         frame.add(homeC);
@@ -126,11 +126,12 @@ public class CercaLibro implements ActionListener{
 	}
 	
 	@Override
-    public void actionPerformed(ActionEvent e) throws IOException{
+    public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton) e.getSource();
-             if(pulsante.getText.equals("RicercaTitolo")){
+             if(pulsante.getText().equals("RicercaTitolo")){
                 String filePath = new File("Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
+                ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
                     String line = "";
                     while ((line = br.readLine()) != null) {
@@ -142,9 +143,9 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        Int annoFile = Integer.parseInt(columns[3]);
+                        int annoFile = Integer.parseInt(columns[3]);
                         String editore = columns[4];
-                        ArrayList<Libro> risultati = new ArrayList<Libro>();
+                        risultati = new ArrayList<Libro>();
                         Libro libro;
                         if(title.contains(titolo.getText())){
                             libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
@@ -157,12 +158,13 @@ public class CercaLibro implements ActionListener{
                         JLabel label = new JLabel("Nessun risultato prodotto");
                         frame.add(label); 
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException z) {
+                    z.printStackTrace();
                 }
-            }else if(pulsante.getText.equals("RicercaAutore")){
+            }else if(pulsante.getText().equals("RicercaAutore")){
                 String filePath = new File("Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
+                ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
                     String line = "";
                     while ((line = br.readLine()) != null) {
@@ -174,9 +176,9 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        Int annoFile = Integer.parseInt(columns[3]);
+                        int annoFile = Integer.parseInt(columns[3]);
                         String editore = columns[4];
-                        ArrayList<Libro> risultati = new ArrayList<Libro>();
+                        risultati = new ArrayList<Libro>();
                         Libro libro;
                         if(author.contains(autore.getText())){
                             libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
@@ -189,12 +191,13 @@ public class CercaLibro implements ActionListener{
                         JLabel label = new JLabel("Nessun risultato prodotto");
                         frame.add(label); 
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException z) {
+                    z.printStackTrace();
                 }
-            }else if(pulsante.getText.equals("RicercaAutAnno")){
+            }else if(pulsante.getText().equals("RicercaAutAnno")){
                 String filePath = new File("Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
+                ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
                     String line = "";
                     while ((line = br.readLine()) != null) {
@@ -206,11 +209,11 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        Int annoFile = Integer.parseInt(columns[3]);
+                        int annoFile = Integer.parseInt(columns[3]);
                         String editore = columns[4];
-                        ArrayList<Libro> risultati = new ArrayList<Libro>();
+                        risultati = new ArrayList<Libro>();
                         Libro libro;
-                        if((autoreA.contains(author.getText()) && (annoFile == Integer.parseInt(anno.getText)))){
+                        if((author.contains(autoreA.getText()) && (annoFile == Integer.parseInt(anno.getText())))){
                             libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
                             risultati.add(libro);
                         }
@@ -222,12 +225,13 @@ public class CercaLibro implements ActionListener{
                         frame.add(label); 
                     }
                     
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException z) {
+                    z.printStackTrace();
                 }
-           }else if(pulsante.getText.equals("RicercaPerTitolo")){
+           }else if(pulsante.getText().equals("RicercaPerTitolo")){
                 String filePath = new File("Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
+                ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
                     String line = "";
                     while ((line = br.readLine()) != null) {
@@ -239,9 +243,9 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        Int annoFile = Integer.parseInt(columns[3]);
+                        int annoFile = Integer.parseInt(columns[3]);
                         String editore = columns[4];
-                        ArrayList<Libro> risultati = new ArrayList<Libro>();
+                        risultati = new ArrayList<Libro>();
                         Libro libro;
                         if(title.contains(titolo.getText())){
                             libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
@@ -254,12 +258,13 @@ public class CercaLibro implements ActionListener{
                         JLabel label = new JLabel("Nessun risultato prodotto");
                         frame.add(label); 
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException z) {
+                    z.printStackTrace();
                 }
-            }else if(pulsante.getText.equals("RicercaPerAutore")){
+            }else if(pulsante.getText().equals("RicercaPerAutore")){
                 String filePath = new File("Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
+                ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
                     String line = "";
                     while ((line = br.readLine()) != null) {
@@ -271,9 +276,9 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        Int annoFile = Integer.parseInt(columns[3]);
+                        int annoFile = Integer.parseInt(columns[3]);
                         String editore = columns[4];
-                        ArrayList<Libro> risultati = new ArrayList<Libro>();
+                        risultati = new ArrayList<Libro>();
                         Libro libro;
                         if(author.contains(autore.getText())){
                             libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
@@ -286,12 +291,13 @@ public class CercaLibro implements ActionListener{
                         JLabel label = new JLabel("Nessun risultato prodotto");
                         frame.add(label); 
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException z) {
+                    z.printStackTrace();
                 }
-            }else if(pulsante.getText.equals("RicercaPerAutAnno")){
+            }else if(pulsante.getText().equals("RicercaPerAutAnno")){
                 String filePath = new File("Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
+                ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
                     String line = "";
                     while ((line = br.readLine()) != null) {
@@ -303,11 +309,11 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        Int annoFile = Integer.parseInt(columns[3]);
+                        int annoFile = Integer.parseInt(columns[3]);
                         String editore = columns[4];
-                        ArrayList<Libro> risultati = new ArrayList<Libro>();
+                        risultati = new ArrayList<Libro>();
                         Libro libro;
-                        if((autoreA.contains(author.getText()) && (annoFile == Integer.parseInt(anno.getText)))){
+                        if((author.contains(autoreA.getText()) && (annoFile == Integer.parseInt(anno.getText())))){
                             libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
                             risultati.add(libro);
                         }
@@ -319,12 +325,12 @@ public class CercaLibro implements ActionListener{
                         frame.add(label); 
                     }
                     
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException z) {
+                    z.printStackTrace();
                 }
            {
-                if(utente.getRegistrato()){
-                    GUI casa = new GUI(utente);
+                if(u.getRegistrato()){
+                    GUI casa = new GUI(u);
                 }else{
                     GUI casa = new GUI();
                 }  

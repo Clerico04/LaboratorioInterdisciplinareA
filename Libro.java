@@ -1,11 +1,11 @@
 import java.io.*;
+import java.util.*;
 
 public class Libro{
     private String titolo;
     private String autore;
     private int anno;
     private String editore;
-    private int votoFinale;
     public boolean valutato=false;
     public boolean consigliato=false;
 
@@ -14,7 +14,6 @@ public class Libro{
         this.autore = autore;
         this.anno = anno;
         this.editore = editore;
-        this.votoFinale = leggiValutazione(titolo)[0];
     }
 
     public Libro(){
@@ -24,19 +23,19 @@ public class Libro{
         this.editore = "";
     }
 
-    private boolean equals(Libro homosexual){
+    public boolean equals(Libro homosexual){
         return ((this.titolo.equals(homosexual.titolo)) && (this.autore.equals(homosexual.autore)) && (this.anno==homosexual.anno) && (this.editore.equals(homosexual.editore)));
     }
 
-    private String stampaLibro(){
+    public String stampaLibro(){
         return("TITOLO: " + this.titolo + " AUTORE: " + this.autore + " ANNO PUBBLICAZIONE: " + this.anno + " EDITORE: " + this.editore);
     }
 
-    private String getTitolo(){
+    public String getTitolo(){
         return this.titolo;
     }
 
-    private static String leggiValutazione(Libro libro){
+    public static String leggiValutazione(Libro libro){
         NodoValutazione nodoCorrente = findNode(libro);
         String s = "";
          if(nodoCorrente == null){
@@ -60,7 +59,7 @@ public class Libro{
         }
     }
 
-    private static String leggiConsigli(Libro communist){
+    public static String leggiConsigli(Libro communist){
          Nodo nodoCorrente = returnRadice();
          ArrayList<String> lista = new ArrayList<String>();
          String stringa = "";
@@ -81,8 +80,8 @@ public class Libro{
             }
          }
         for(String s: lista){
-            string = string + "\n" + s;
+            stringa = stringa + "\n" + s;
         }
-        return string;
+        return stringa;
     }
 }

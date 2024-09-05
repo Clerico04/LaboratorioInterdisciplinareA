@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.awt.*; 
 import java.util.*;
 
-public class LibreriaGUI{
+public class LibreriaGUI implements ActionListener{
     
     Utente u;
     JFrame frameL;
@@ -24,14 +24,14 @@ public class LibreriaGUI{
         JButton homeL = new JButton("Home");
         JButton creazione = new JButton("Crea Libreria");
         JPanel panel = new JPanel();
-        homeL.addListener(this);
+        homeL.addActionListener(this);
 
         ArrayList<Libreria> librerie = leggiLibrerie(u);
 
         JButton bottone;
         for(Libreria l : librerie){
             bottone = new JButton(l.getTitolo());
-            bottone.addListener(this);
+            bottone.addActionListener(this);
             frameL.add(bottone);
         }        
         
@@ -49,7 +49,7 @@ public class LibreriaGUI{
     
     
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e){
 		JButton pulsante = (JButton)e.getSource();
         if(pulsante.getText() == "Crea Libreria"){
             CreaLibreria cl = new CreaLibreria(u);
@@ -60,7 +60,7 @@ public class LibreriaGUI{
                 GUI home = new GUI();
             }
         }else{
-            VisualizzaLiberia libreriaV = new VisualizzaLiberia(pulsante.getText(), u);
+            VisualizzaLibreria libreriaV = new VisualizzaLibreria(pulsante.getText(), u);
         }
 	}
 
@@ -81,7 +81,7 @@ public class LibreriaGUI{
 				String[] columns = line.split(";");
 				if(columns[0].equals(utente.getId())){
                     libri = new Libro[columns.length-2];
-                    for(i=0; i<(columns.length-2); i++){
+                    for(int i=0; i<(columns.length-2); i++){
                         libri[i]=columns[i+2];
                     }
 					arg.add(new Libreria(columns[1],libri));

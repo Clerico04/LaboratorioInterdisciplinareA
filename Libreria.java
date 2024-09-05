@@ -19,11 +19,11 @@ public class Libreria{
         this.libroni = libroni;
     }
 
-    private String getTitolo(){
+    public String getTitolo(){
         return this.titolo;
     }
 
-    private static Libreria getLibreria(String nomeLibreria, String username){
+    public static Libreria getLibreria(String nomeLibreria, String username){
         String filePath = new File("Librerie.dati.csv").getAbsolutePath();
 		boolean isFirstLine = true;
         Libro[] libri;
@@ -40,7 +40,7 @@ public class Libreria{
 				String[] columns = line.split(";");
 				if((columns[0].equals(username))&&(columns[1].equals(nomeLibreria))){
                     libri = new Libro[columns.length-2];
-                    for(i=0; i<(columns.length-2); i++){
+                    for(int i=0; i<(columns.length-2); i++){
                         libri[i]=columns[i+2];
                     }
 					l = new Libreria(nomeLibreria, libri);
@@ -52,7 +52,7 @@ public class Libreria{
         return l; 
     }
 
-    private Libro[] getElencoLibri(){
+    public Libro[] getElencoLibri(){
         return this.libroni;
     }
 }

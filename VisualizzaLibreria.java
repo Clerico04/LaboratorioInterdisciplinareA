@@ -25,8 +25,8 @@ public class VisualizzaLibreria implements ActionListener{
         JButton aggiungiLibro = new JButton("Aggiungi libro");
         JButton homeV = new JButton("Home");
         JPanel panel = new JPanel();
-        aggiungiLibro.addListener(this);
-        homeL.addListener(this);
+        aggiungiLibro.addActionListener(this);
+        homeL.addActionListener(this);
 
         libreria = Libreria.getLibreria(nome, u.getId());
         libri = libreria.getElencoLibri();
@@ -34,7 +34,7 @@ public class VisualizzaLibreria implements ActionListener{
         JButton bottone;
         for(Libro l : libri){
             bottone = new JButton(l.getTitolo());
-            bottone.addListener(this);
+            bottone.addActionListener(this);
             frameV.add(bottone);
         }
         
@@ -59,7 +59,7 @@ public class VisualizzaLibreria implements ActionListener{
             Libro temp;
             String t = pulsante.getText();
             for(Libro l : libri){
-                if(l.getTitolo == t){
+                if(l.getTitolo() == t){
                     temp = l;
                 }
             }

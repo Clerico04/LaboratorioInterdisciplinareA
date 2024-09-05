@@ -8,6 +8,7 @@ public class CreaLibreria implements ActionListener{
 
     Utente u;
     JTextField nomeLibreria;
+    JFrameL frameL;
 
     public CreaLibreria(){
         JFrame frame = new JFrame();
@@ -23,10 +24,10 @@ public class CreaLibreria implements ActionListener{
 
         JButton homeL = new JButton("Home");
         JPanel panel = new JPanel();
-        homeL.addListener(this);
+        homeL.addActionListener(this);
 
         nomeLibreria = new JTextField("nomeLibreria",20);
-        JButton bottone = new JButton("Invio");   
+        JButton creazione = new JButton("Invio");   
         
         panel.add(homeL, BorderLayout.WEST);
         panel.add(creazione, BorderLayout.EAST);
@@ -43,7 +44,7 @@ public class CreaLibreria implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 		JButton pulsante = (JButton)e.getSource();
         if(pulsante.getText() == "Home"){
-            if(u.getRegistrato){
+            if(u.getRegistrato()){
                 GUI gui = new GUI(u);
             }else{
                 GUI gui = new GUI();
