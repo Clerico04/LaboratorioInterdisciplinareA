@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.awt.*; 
 import java.util.*;
 
-public class cercaLibro implements ActionListener{
+public class CercaLibro implements ActionListener{
 
 	JTextField titolo;
     JTextField autore;
@@ -90,11 +90,11 @@ public class cercaLibro implements ActionListener{
         JPanel piccolo2 = new JPanel();
         JPanel piccolo3 = new JPanel();
         
-        JButton rT = new JButton("RicercaTitolo");
+        JButton rT = new JButton("RicercaPerTitolo");
         rt.addListener(this);
-        JButton rA = new JButton("RicercaAutore");
+        JButton rA = new JButton("RicercaPerAutore");
         rA.addListener(this);
-        JButton rAA = new JButton("RicercaAutAnno");
+        JButton rAA = new JButton("RicercaPerAutAnno");
         rAA.addListener(this);
 
         piccolo3.add(autoreA, BorderLayout.WEST);
@@ -128,7 +128,7 @@ public class cercaLibro implements ActionListener{
 	@Override
     public void actionPerformed(ActionEvent e) throws IOException{
 			JButton pulsante = (JButton) e.getSource();
-            if(pulsante.getText.equals("RicercaTitolo")){
+             if(pulsante.getText.equals("RicercaTitolo")){
                 String filePath = new File("Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -152,7 +152,7 @@ public class cercaLibro implements ActionListener{
                         }
                     }
                     if(!(risultati.isEmpty())){
-                        ListaLibri l = new ListaLibri(risultati, u);                       
+                        ListaLibri l = new ListaLibri(risultati, u, libreria);                       
                     }else{
                         JLabel label = new JLabel("Nessun risultato prodotto");
                         frame.add(label); 
@@ -184,7 +184,7 @@ public class cercaLibro implements ActionListener{
                         }
                     }
                     if(!(risultati.isEmpty())){
-                        ListaLibri l = new ListaLibri(risultati, u);
+                        ListaLibri l = new ListaLibri(risultati, u, libreria);
                     }else{
                         JLabel label = new JLabel("Nessun risultato prodotto");
                         frame.add(label); 
@@ -193,6 +193,103 @@ public class cercaLibro implements ActionListener{
                     e.printStackTrace();
                 }
             }else if(pulsante.getText.equals("RicercaAutAnno")){
+                String filePath = new File("Libri.dati.csv").getAbsolutePath();
+                boolean isFirstLine = true;
+                try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                    String line = "";
+                    while ((line = br.readLine()) != null) {
+                        if (isFirstLine) {
+                            isFirstLine = false;
+                            continue;
+                        }
+                        String[] columns = line.split(";");
+                        String isbn = columns[0];
+                        String title = columns[1];
+                        String author = columns[2];
+                        Int annoFile = Integer.parseInt(columns[3]);
+                        String editore = columns[4];
+                        ArrayList<Libro> risultati = new ArrayList<Libro>();
+                        Libro libro;
+                        if((autoreA.contains(author.getText()) && (annoFile == Integer.parseInt(anno.getText)))){
+                            libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                            risultati.add(libro);
+                        }
+                    }
+                    if(!(risultati.isEmpty())){
+                        ListaLibri l = new ListaLibri(risultati, u, libreria);
+                    }else{
+                        JLabel label = new JLabel("Nessun risultato prodotto");
+                        frame.add(label); 
+                    }
+                    
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+           }else if(pulsante.getText.equals("RicercaPerTitolo")){
+                String filePath = new File("Libri.dati.csv").getAbsolutePath();
+                boolean isFirstLine = true;
+                try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                    String line = "";
+                    while ((line = br.readLine()) != null) {
+                        if (isFirstLine) {
+                            isFirstLine = false;
+                            continue;
+                        }
+                        String[] columns = line.split(";");
+                        String isbn = columns[0];
+                        String title = columns[1];
+                        String author = columns[2];
+                        Int annoFile = Integer.parseInt(columns[3]);
+                        String editore = columns[4];
+                        ArrayList<Libro> risultati = new ArrayList<Libro>();
+                        Libro libro;
+                        if(title.contains(titolo.getText())){
+                            libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                            risultati.add(libro);
+                        }
+                    }
+                    if(!(risultati.isEmpty())){
+                        ListaLibri l = new ListaLibri(risultati, u);                       
+                    }else{
+                        JLabel label = new JLabel("Nessun risultato prodotto");
+                        frame.add(label); 
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if(pulsante.getText.equals("RicercaPerAutore")){
+                String filePath = new File("Libri.dati.csv").getAbsolutePath();
+                boolean isFirstLine = true;
+                try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                    String line = "";
+                    while ((line = br.readLine()) != null) {
+                        if (isFirstLine) {
+                            isFirstLine = false;
+                            continue;
+                        }
+                        String[] columns = line.split(";");
+                        String isbn = columns[0];
+                        String title = columns[1];
+                        String author = columns[2];
+                        Int annoFile = Integer.parseInt(columns[3]);
+                        String editore = columns[4];
+                        ArrayList<Libro> risultati = new ArrayList<Libro>();
+                        Libro libro;
+                        if(author.contains(autore.getText())){
+                            libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                            risultati.add(libro);
+                        }
+                    }
+                    if(!(risultati.isEmpty())){
+                        ListaLibri l = new ListaLibri(risultati, u);
+                    }else{
+                        JLabel label = new JLabel("Nessun risultato prodotto");
+                        frame.add(label); 
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if(pulsante.getText.equals("RicercaPerAutAnno")){
                 String filePath = new File("Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -225,7 +322,7 @@ public class cercaLibro implements ActionListener{
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else{
+           {
                 if(utente.getRegistrato()){
                     GUI casa = new GUI(utente);
                 }else{
@@ -233,4 +330,5 @@ public class cercaLibro implements ActionListener{
                 }  
             }
 	}
+    }
 }

@@ -25,7 +25,7 @@ public class CreaLibreria implements ActionListener{
         JPanel panel = new JPanel();
         homeL.addListener(this);
 
-        nomeLibreria = new JTextField("",20);
+        nomeLibreria = new JTextField("nomeLibreria",20);
         JButton bottone = new JButton("Invio");   
         
         panel.add(homeL, BorderLayout.WEST);

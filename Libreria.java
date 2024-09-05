@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.awt.*; 
 import java.util.*;
 
-public class Liberia{
+public class Libreria{
 
     private String titolo;
     private Libro[] libroni;
@@ -40,7 +40,7 @@ public class Liberia{
 				String[] columns = line.split(";");
 				if((columns[0].equals(username))&&(columns[1].equals(nomeLibreria))){
                     libri = new Libro[columns.length-2];
-                    for(i=0;i<(columns.length-2),i++){
+                    for(i=0; i<(columns.length-2); i++){
                         libri[i]=columns[i+2];
                     }
 					l = new Libreria(nomeLibreria, libri);

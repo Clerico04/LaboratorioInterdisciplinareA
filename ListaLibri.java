@@ -10,6 +10,7 @@ public class ListaLibri implements ActionListener{
     ArrayList<Libro> listone;
     int i = 0;
     Utente u;
+    Libreria libreria;
 
 	public ListaLibri(){
 		JFrame finestra = new JFrame("Login");
@@ -17,7 +18,43 @@ public class ListaLibri implements ActionListener{
 		finestra.setDeaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		finestra.setVisible(true);
 	}
-    
+
+    public ListaLibri(ArrayList<Libro> arg, Utente utente, Libreria l){
+        u = utente;
+        libreria = l;
+
+		JFrame finestra = new JFrame("Login");
+		finestra.setSize(990, 540);
+		finestra.setDeaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
+        JPanel bottoni = JPanel();
+        JButton succ = new JButton ("Successivo");
+        succ.addListener(this);
+        JButton ped = new JButton ("Precedente");
+        ped.addListener(this);
+        JButton visa = new JButton ("Visualizza il Libro");
+        visa.addListener(this);
+        JButton homeList = new JButton("Home");
+        homeList.addListener(this);
+
+        listone = arg;
+        Libro libro = listone.get(i);
+        libretto = new JLabel(libro.stampaLibro());
+
+        bottoni.add(succ, BorderLayout.EAST);
+        bottoni.add(ped, BorderLayout.WEST);
+        bottoni.add(visa, BorderLayout.CENTER);
+
+        JPanel grossa = new JPanel();
+        grossa.add(libretto, BorderLayout.NORTH);
+        grossa.add(bottoni, BorderLayout.CENTER);
+
+        finestra.add(homeList, BorderLayout.APPLET);
+        finestra.add(grossa, BorderLayout.CENTER);
+
+		finestra.setVisible(true);
+	}
+
     public ListaLibri(ArrayList<Libro> arg, Utente utente){
         u = utente;
 
@@ -75,6 +112,8 @@ public class ListaLibri implements ActionListener{
 			    }
             }else if(pulsante.getText().equals("Visualizza Libro")){
                 VisualizzaLibro v = new VisualizzaLibro(u, listone.get(i));
+            }else if(pulsante.getText().equals("Visualizza il Libro")){
+                VisualizzaLibro v = new VisualizzaLibro(u, listone.get(i), libreria);
             }else{
                 if(u.getRegistrato()){
                     GUI homePage = new GUI(u);

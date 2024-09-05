@@ -21,7 +21,7 @@ public class GUI implements ActionListener{
         titolo.setFont(new Font("Arial", Font.BOLD, 45));
         titolo.setText("Book recommender by Alessando Monaci e Luca Clerici");
         titoloCentrato.add(titolo, BorderLayout.CENTER);
-        home.add(titoloCentrato, BorderLayout.APPLET);
+        home.add(titoloCentrato, BorderLayout.NORTH);
 		
 		JButton login = new JButton("Login");
 		JPanel logRegPiccoli = new JPanel();
@@ -29,7 +29,7 @@ public class GUI implements ActionListener{
 		logRegPiccoli.add(login, BorderLayout.WEST);
 
 		JButton cercaLibro = new JButton("Cerca Libro");
-		cercaLibro.addListener(this);
+		cercaLibro.addActionListener(this);
 		home.add(cercaLibro);
 		
 		JButton registrazione = new JButton("Registrazione");
@@ -65,7 +65,7 @@ public class GUI implements ActionListener{
 		JPanel logRegPiccoli = new JPanel();
 		
 		JButton cercaLibro = new JButton("Cerca Libro");
-		cercaLibro.addListener(this);
+		cercaLibro.addActionListener(this);
 		logRegPiccoli.add(cercaLibro, BorderLayout.CENTER);
 		
 		JLabel registrato = new JLabel();

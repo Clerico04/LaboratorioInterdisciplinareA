@@ -12,12 +12,13 @@ public class Registrazione implements ActionListener{
     JTextField email;
     JTextField username;
     JTextField password;
+    JFrame registrazione;
         
     public Registrazione(){
 
-        JFrame registrazione = new JFrame("Registrazione");
+        registrazione = new JFrame("Registrazione");
         registrazione.setSize(990, 540);
-		registrazione.setDeaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		registrazione.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JLabel chiedi = new JLabel();
 		chiedi.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -43,11 +44,11 @@ public class Registrazione implements ActionListener{
         registrazione.add(panel2);
         
         JButton invia = new JButton("Invio");
-        invia.addListener(this);
+        invia.addActionListener(this);
         registrazione.add(invia);
 
         JButton homeR = new JButton("Home");
-        homeR.addListener(this);
+        homeR.addActionListener(this);
         registrazione.add(homeR);
 
         registrazione.setVisible(true);
@@ -59,49 +60,51 @@ public class Registrazione implements ActionListener{
 	}
 
     @Override
-    public void actionPerformed(ActionEvent e) throws IOException{
+    public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton)e.getSource();
             if(pulsante.getText().equals("Registrazione")){
-                String nome = nome.getText();
-                String cognome = cognome.getText();
-                String cf = cf.getText();
-                String email = email.getText();
-                String username = username.getText();
-                String password = password.getText();
-
-                if((nome.length()>0) && (cognome.length()>0) && (cf.length()>0) && (email.length()>0) && (username.length()>0)){
-                    if((password.length()>0) && (!esistenza(username, 4)) && (!esistenza(email, 3))){
-                        File utentiRegistrati = new File("UtentiRegistrati.dati.txt");
-                        FileWriter fileout = new FileWriter(utentiRegistrati);
-                        BufferedWriter bw = new BufferedWriter(fileout);
-                        bw.write(nome + ";");
-                        bw.write(cognome + ";");
-                        bw.write(cf + ";");
-                        bw.write(email + ";");
-                        bw.write(username + ";");
-                        bw.write(password);
-                        bw.flush();
-                        bw.close();
-                        GUI homePage = new GUI();
+                String name = nome.getText();
+                String surname = cognome.getText();
+                String codice = cf.getText();
+                String mail = email.getText();
+                String id = username.getText();
+                String pass = password.getText();
+                
+                try{
+                    if((name.length()>0) && (surname.length()>0) && (codice.length()>0) && (mail.length()>0) && (id.length()>0)){
+                        if((pass.length()>0) && (!esistenza(id, 4)) && (!esistenza(mail, 3))){
+                            File utentiRegistrati = new File("UtentiRegistrati.dati.txt");
+                            FileWriter fileout = new FileWriter(utentiRegistrati);
+                            BufferedWriter bw = new BufferedWriter(fileout);
+                            bw.write(name + ";");
+                            bw.write(surname + ";");
+                            bw.write(codice + ";");
+                            bw.write(mail + ";");
+                            bw.write(id + ";");
+                            bw.write(pass);
+                            bw.flush();
+                            bw.close();
+                            GUI homePage = new GUI();
+                        }else{
+                            JLabel esistente = new JLabel();
+                            esistente.setFont(new Font("Arial", Font.PLAIN, 15));
+                            esistente.setText("Nome utente o email già in uso");
+                            registrazione.add(esistente);
+                        }
                     }else{
-                        JLabel esistente = new JLabel();
-                        esistente.setFont(new Font("Arial", Font.PLAIN, 15));
-                        esistente.setText("Nome utente o email già in uso");
-                        registrazione.add(esistente);
+                        JLabel riempi = new JLabel();
+                        riempi.setFont(new Font("Arial", Font.PLAIN, 15));
+                        riempi.setText("Riempi tutti i campi");
+                        registrazione.add(riempi);
+                    }
+                    }catch(IOException z){
+                        z.printStackTrace();
                     }
                 }else{
-                    JLabel riempi = new JLabel();
-                    riempi.setFont(new Font("Arial", Font.PLAIN, 15));
-                    riempi.setText("Riempi tutti i campi");
-                    registrazione.add(riempi);
+                    GUI homePage = new GUI();
                 }
-            }else{
-                GUI homePage = new GUI();
-            }
+    }
 			
-
-            
-	}
 
     private static boolean esistenza(String id, int colonna){
         String filePath = new File("UtentiRegistrati.dati.txt").getAbsolutePath();
@@ -124,6 +127,7 @@ public class Registrazione implements ActionListener{
         } catch (IOException e) {
             e.printStackTrace();
         } 
+        return false;
     }
     
 }

@@ -31,13 +31,13 @@ public class VisualizzaLibro implements ActionListener{
 
         JButton dettagli = new JButton("Dettagli");
         JButton homeV = new JButton("Home");
-        JButton aggiungi = new JButton("Aggiungi alla libreria");
-        aggiungi.addListener(this);
+        /*JButton aggiungi = new JButton("Aggiungi alla libreria");
+        aggiungi.addListener(this);*/
         JPanel homeVPanel = new JPanel();
         homeV.addListener(this);
         recensioni.addListener(this);
         homeVPanel.add(homeV, BorderLayout.EAST);
-        homeVPanel.add(aggiungi, BorderLayout.CENTER);
+        /*homeVPanel.add(aggiungi, BorderLayout.CENTER);*/
         
         frameV.add(dettagli); 
         frameV.add(homeVPanel, BorderLayout.APPLET);
@@ -50,7 +50,7 @@ public class VisualizzaLibro implements ActionListener{
         u = utente
         dettagli = new JLabel();;
         libro = l;
-        omosessuale0 libreria;
+        omosessuale = libreria;
 
         JFrame frameV = new JFrame("Visualizza Libro");
 		frameV.setSize(990, 540);
@@ -114,27 +114,27 @@ public class VisualizzaLibro implements ActionListener{
             Consigli c = new Consigli(libro,omosessuale,u);
         }else if (pulsante.getText().equals("Inserisci valutazioni")){
             Valutazione v = new Valutazione(libro,omosessuale,u);
-        }else{
+        }/*else{
 
-        
 
-        }
+
+        }*/
         }    
 
     public static void modificaLibreria(String nomeFile, String[] chiavi) throws IOException {
-        List<String> righe = new ArrayList<>();
-        boolean rigaModificata = false; 
+        List<String> righe = new ArrayList<String>();
+        boolean rigaModificata = false;
+        String nuovaRiga = "";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(nomeFile))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
-                // Cerca la parola chiave nella riga corrente
                 if ((linea.contains(chiavi[0])) && (linea.contains(chiavi[1])) && !rigaModificata) {
-                    // Se la parola chiave è trovata e la riga non è ancora stata modificata
-                    righe.add(nuovaRiga); // Aggiungi la nuova riga al posto di quella originale
-                    rigaModificata = true; // Segna che la modifica è stata effettuata
+                    nuovaRiga = linea + libro.getTitolo() + ";";
+                    righe.add(nuovaRiga); 
+                    rigaModificata = true;
                 } else {
-                    righe.add(linea); // Aggiungi la riga originale
+                    righe.add(linea);
                 }
             }
         }
@@ -144,7 +144,6 @@ public class VisualizzaLibro implements ActionListener{
             return;
         }
 
-        // Scrive nuovamente tutte le righe nel file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeFile))) {
             for (String linea : righe) {
                 writer.write(linea);

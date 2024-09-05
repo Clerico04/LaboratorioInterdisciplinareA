@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.awt.*; 
 import java.util.*;
 
-public class LiberiaGUI{
+public class LibreriaGUI{
     
     Utente u;
     JFrame frameL;
@@ -81,7 +81,7 @@ public class LiberiaGUI{
 				String[] columns = line.split(";");
 				if(columns[0].equals(utente.getId())){
                     libri = new Libro[columns.length-2];
-                    for(i=0;i<(columns.length-2),i++){
+                    for(i=0; i<(columns.length-2); i++){
                         libri[i]=columns[i+2];
                     }
 					arg.add(new Libreria(columns[1],libri));

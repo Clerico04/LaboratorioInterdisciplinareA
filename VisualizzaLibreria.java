@@ -54,7 +54,7 @@ public class VisualizzaLibreria implements ActionListener{
         if(pulsante.getText().equals("Home")){
             GUI gui = new GUI(u);
         }else if(pulsante.getText().equals("Aggiungi libro")){
-            CercaLibro cl = new CercaLibro(u,libreria);
+            CercaLibro cl = new CercaLibro(u, libreria);
         }else{
             Libro temp;
             String t = pulsante.getText();

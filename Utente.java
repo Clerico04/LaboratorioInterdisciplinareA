@@ -30,25 +30,7 @@ public class Utente{
         this.registrato = false;
     }
 
-    private void registraLibreria(){
-        if(this.registrato){
-            File librerie = new File(Librerie.dati.csv);
-            FileWriter fileout = new FileWriter(librerie);
-            BufferedWriter bw = new BufferedWriter(fileout);
-            System.out.print("Come vuoi chiamare la libreria? (vai a capo per terminare): \n");
-            String nomeLibreria = Input.readLine();
-            bw.write(this.id + ";");
-            bw.write(nomeLibreria + ";");
-
-            
-            bw.flush();
-            bw.close();
-        }else{
-            registrazione();
-        }
-    }
-
-    private  boolean getRegistrato(){
+    public  boolean getRegistrato(){
         return this.registrato;
     }
 

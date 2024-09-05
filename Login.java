@@ -7,12 +7,13 @@ public class Login implements ActionListener{
 	
 	JTextField nome;
 	JTextField password;
+	JFrame login;
 	
 	public Login(){
 		
-		JFrame login = new JFrame("Login");
+		login = new JFrame("Login");
 		login.setSize(990, 540);
-		login.setDeaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		
 		JLabel domanda = new JLabel();
@@ -32,10 +33,10 @@ public class Login implements ActionListener{
 		JButton homeL = new JButton("Home");
 		JPanel homeP = new JPanel();
 		JButton entra = new JButton("Login");
-		homeL.addListener(this);
+		homeL.addActionListener(this);
 		homeP.add(homeL, BorderLayout.CENTER);
 		login.add(homeP);
-		entra.addListener(this);
+		entra.addActionListener(this);
 		entrata.add(entra, BorderLayout.SOUTH);
 		login.add(entrata);
 		
@@ -44,17 +45,17 @@ public class Login implements ActionListener{
 	}
 	
 	public static void main(String[] args){
-		Login login = new Login();
+		Login l = new Login();
 	}
 	
 	@Override
-    public void actionPerformed(ActionEvent e) throws IOException{
+    public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton)e.getSource();
 
 
 			if(pulsante.getText().equals("Login")){
 				String id = nome.getText();
-				String password = password.getText();
+				String pass = password.getText();
 				String filePath = new File("UtentiRegistrati.dati.txt").getAbsolutePath();
 				boolean isFirstLine = true;
 				
@@ -67,7 +68,7 @@ public class Login implements ActionListener{
 						}
 
 						String[] columns = line.split(";");
-						if((id.equals(columns[4])) && (password.equals(columns[5]))){
+						if((id.equals(columns[4])) && (pass.equals(columns[5]))){
 							Utente utente = new Utente(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
 							GUI gui = new GUI(utente);
 						}else{
@@ -78,8 +79,8 @@ public class Login implements ActionListener{
 						}
 						
 					}
-				} catch (IOException e) {
-					e.printStackTrace();
+				} catch (IOException z) {
+					z.printStackTrace();
 				} 
 			}else{
 				GUI homePage = new GUI();
