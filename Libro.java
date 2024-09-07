@@ -35,20 +35,16 @@ public class Libro{
         return this.titolo;
     }
 
-    public static String leggiValutazione(Libro libro){
-        NodoValutazione nodoCorrente = findNode(libro);
-        String s = "";
-         if(nodoCorrente == null){
-            s="Nessuna valutazione per questo libro";
-         }else{
-            s = s + stampaValutazioni("Stile: ", nodoCorrente.stile);
-            s = s + stampaValutazioni("Contenuto: ", nodoCorrente.contenuto);
-            s = s + stampaValutazioni("Gradevolezza: ", nodoCorrente.gradevolezza);
-            s = s + stampaValutazioni("Originalita: ", nodoCorrente.originlita);
-            s = s + stampaValutazioni("Edizione: ", nodoCorrente.edizione);
-            s = s + stampaValutazioni("Voto finale: ", nodoCorrente.votoFinale);
-         }
-         return s;
+    public boolean getValutato(){
+        return this.valutato;
+    }
+
+    public void setValutato(boolean cambio){
+        this.valutato = cambio;
+    }
+
+    public static void leggiValutazione(Libro libro){
+        LeggiValutazione lv = new LeggiValutazione(libro);
     }
 
     private static String stampaValutazioni(String s, int[] mark){
@@ -85,3 +81,4 @@ public class Libro{
         return stringa;
     }
 }
+

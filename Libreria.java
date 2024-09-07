@@ -41,7 +41,7 @@ public class Libreria{
 				if((columns[0].equals(username))&&(columns[1].equals(nomeLibreria))){
                     libri = new Libro[columns.length-2];
                     for(int i=0; i<(columns.length-2); i++){
-                        libri[i]=columns[i+2];
+                        libri[i] = searchBookTitle(columns[i+2]);
                     }
 					l = new Libreria(nomeLibreria, libri);
 				}	
@@ -50,6 +50,34 @@ public class Libreria{
 			e.printStackTrace();
 		}
         return l; 
+    }
+
+    public static Libro searchBookTitle (String tit){
+        String filePath = new File("Libri.dati.csv").getAbsolutePath();
+        boolean isFirstLine = true;
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
+                String[] columns = line.split(";");
+                String isbn = columns[0];
+                String title = columns[1];
+                String author = columns[2];
+                int annoFile = Integer.parseInt(columns[3]);
+                String editore = columns[4];
+                Libro cercato;
+                if(title.equals(tit)){
+                    cercato = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                    return cercato;
+                }
+            }
+        } catch (IOException z) {
+            z.printStackTrace();
+        }
+        return null;
     }
 
     public Libro[] getElencoLibri(){

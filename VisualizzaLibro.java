@@ -9,7 +9,7 @@ public class VisualizzaLibro implements ActionListener{
     Utente u;
     Libro libro;
     JLabel dettagli;
-    Libreria omosessuale;
+    Libreria lib;
     JFrame frameV;
 
     public VisualizzaLibro(){
@@ -32,13 +32,10 @@ public class VisualizzaLibro implements ActionListener{
 
         JButton dettagli = new JButton("Dettagli");
         JButton homeV = new JButton("Home");
-        /*JButton aggiungi = new JButton("Aggiungi alla libreria");
-        aggiungi.addActionListener(this);*/
         JPanel homeVPanel = new JPanel();
         homeV.addActionListener(this);
         recensioni.addActionListener(this);
         homeVPanel.add(homeV, BorderLayout.EAST);
-        /*homeVPanel.add(aggiungi, BorderLayout.CENTER);*/
         
         frameV.add(dettagli); 
         frameV.add(homeVPanel, BorderLayout.NORTH);
@@ -51,7 +48,7 @@ public class VisualizzaLibro implements ActionListener{
         u = utente;
         dettagli = new JLabel();;
         libro = l;
-        omosessuale = libreria;
+        lib = libreria;
 
         frameV = new JFrame("Visualizza Libro");
 		frameV.setSize(990, 540);
@@ -64,6 +61,8 @@ public class VisualizzaLibro implements ActionListener{
 
         JButton dettagli = new JButton("Dettagli");
         JButton homeV = new JButton("Home");
+        JButton aggiungi = new JButton("Aggiungi alla libreria");
+        aggiungi.addActionListener(this);
         JButton consigli = new JButton("Inserisci consigli");
         consigli.addActionListener(this);
         JButton valutazioni = new JButton("Inserisci valutazioni");
@@ -75,6 +74,7 @@ public class VisualizzaLibro implements ActionListener{
         homeVPanel.add(homeV, BorderLayout.WEST);
         homeVPanel.add(valutazioni, BorderLayout.CENTER);
         homeVPanel.add(consigli, BorderLayout.EAST);
+        homeVPanel.add(aggiungi, BorderLayout.SOUTH);
         
         frameV.add(dettagli); 
         frameV.add(homeVPanel, BorderLayout.NORTH);
@@ -112,15 +112,27 @@ public class VisualizzaLibro implements ActionListener{
                 GUI g = new GUI();
             }
         }else if(pulsante.getText().equals("Inserisci consigli")){
-            Consigli c = new Consigli(libro,omosessuale,u);
+            if(u.getRegistrato()){
+                Consigli c = new Consigli(libro,lib,u);
+            }else{
+                JLabel noRegistrato = new JLabel();
+                noRegistrato.setFont(new Font("Arial", Font.PLAIN, 15));
+                noRegistrato.setText("Solo gli utenti registrati possono inserire valutazioni");
+                frameV.add(noRegistrato);
+            } 
         }else if (pulsante.getText().equals("Inserisci valutazioni")){
-            Valutazioni v = new Valutazioni(libro,omosessuale,u);
-        }/*else{
-
-
-
-        }*/
-        }    
+            if(U.getRegistrato()){
+                Valutazioni v = new Valutazioni(libro, u);
+            }else{
+                JLabel noRegistrato = new JLabel();
+                noRegistrato.setFont(new Font("Arial", Font.PLAIN, 15));
+                noRegistrato.setText("Solo gli utenti registrati possono inserire valutazioni");
+                frameV.add(noRegistrato);
+            }
+        }else{
+            modificaLibreria("Librerie.dati.csv", [utente.getId(), lib.getTitolo()]);
+        }
+    }    
 
     public static void modificaLibreria(String nomeFile, String[] chiavi) throws IOException {
         ArrayList<String> righe = new ArrayList<String>();
@@ -141,7 +153,10 @@ public class VisualizzaLibro implements ActionListener{
         }
 
         if (!rigaModificata) {
-           /* System.out.println("Nessuna riga contenente la parola chiave \"" + parolaChiave + "\" è stata trovata.");*/
+            JLabel label = new JLabel();
+            label.setFont(new Font("Arial", Font.PLAIN, 15));
+            label.setText("Nessuna riga contenente la parola chiave \"" + parolaChiave + "\" è stata trovata.")
+            frameV.add(label);
             return;
         }
 

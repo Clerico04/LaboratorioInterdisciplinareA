@@ -82,14 +82,42 @@ public class LibreriaGUI implements ActionListener{
 				if(columns[0].equals(utente.getId())){
                     libri = new Libro[columns.length-2];
                     for(int i=0; i<(columns.length-2); i++){
-                        libri[i]=columns[i+2];
+                        libri[i] = trovaLibroTitolo(columns[i+2]);
                     }
-					arg.add(new Libreria(columns[1],libri));
+					arg.add(new Libreria(columns[1], libri));
 				}	
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
         return arg; 
+    }
+
+    public Libro trovaLibroTitolo (String titolo){
+        String filePath = new File("Libri.dati.csv").getAbsolutePath();
+        boolean isFirstLine = true;
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
+                String[] columns = line.split(";");
+                String isbn = columns[0];
+                String title = columns[1];
+                String author = columns[2];
+                int annoFile = Integer.parseInt(columns[3]);
+                String editore = columns[4];
+                Libro cercato;
+                if(title.equals(titolo)){
+                    cercato = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                    return cercato;
+                }
+            }
+        } catch (IOException z) {
+            z.printStackTrace();
+        }
+        return null;
     }
 }
