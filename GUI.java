@@ -93,18 +93,23 @@ public class GUI implements ActionListener{
 		JButton pulsante = (JButton)e.getSource();
         if(pulsante.getText() == "Login"){
 				Login log = new Login();
+				home.dispose();
 			}else if (pulsante.getText() == "Registrazione"){
 				Registrazione reg = new Registrazione();
+				home.dispose();
 			}else if(pulsante.getText() == "Cerca Libro"){
-				CercaLibro search = new CercaLibro(u);	
+				CercaLibro search = new CercaLibro(u);
+				home.dispose();	
 			}else if(pulsante.getText() == "Librerie"){
 				if(u.getRegistrato()){
 					LibreriaGUI puzzo = new LibreriaGUI(u);
+					home.dispose();
 				}else{
 					JLabel registrati = new JLabel();
 					registrati.setFont(new Font("Arial", Font.ITALIC, 15));
 					registrati.setText("Librerie accessibili solo agli utenti registrati e loggati, registrati e accedi per utilizzare questa funzione");
 					home.add(registrati);
+					home.validate();
 				}
 			}
 	}

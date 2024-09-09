@@ -16,7 +16,7 @@ public class LibreriaGUI implements ActionListener{
     public LibreriaGUI (Utente utente){
         u = utente;
 
-        frameL = new JFrame("Cerca Libro");
+        frameL = new JFrame("Librerie");
 		frameL.setSize(990, 540);
 		frameL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         

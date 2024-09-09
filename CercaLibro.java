@@ -13,11 +13,13 @@ public class CercaLibro implements ActionListener{
     JFrame frame;
     Utente u;
     Libreria libreria;
+    JLabel label;
 
     public CercaLibro(){
         frame = new JFrame("Cerca Libro");
-		frame.setSize(990, 540);
+		frame.setSize(1920, 1080);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 
 	public CercaLibro(Utente utente, Libreria l){
@@ -25,10 +27,12 @@ public class CercaLibro implements ActionListener{
         libreria=l;
 
         frame = new JFrame("Cerca Libro");
-		frame.setSize(990, 540);
+		frame.setSize(1920, 1080);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(5, 2));
 
         JPanel panel = new JPanel();
+
 
         titolo = new JTextField(50);
         autore = new JTextField(50);
@@ -63,8 +67,11 @@ public class CercaLibro implements ActionListener{
         JButton homeC = new JButton("Home");
         homeC.addActionListener(this);
 
+        label = new JLabel("");
+
         frame.add(panel);
         frame.add(homeC);
+        frame.add(label);
         	
 		frame.setVisible(true);
 		
@@ -76,8 +83,9 @@ public class CercaLibro implements ActionListener{
         libreria = null;
         
         frame = new JFrame("Cerca Libro");
-		frame.setSize(990, 540);
+		frame.setSize(1920, 1080);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(5, 2));
 
         JPanel panel = new JPanel();
 
@@ -114,8 +122,11 @@ public class CercaLibro implements ActionListener{
         JButton homeC = new JButton("Home");
         homeC.addActionListener(this);
 
+        label = new JLabel("");
+
         frame.add(panel);
-        frame.add(homeC);
+        frame.add(homeC, BorderLayout.EAST);
+        frame.add(label);
         	
 		frame.setVisible(true);
 		
@@ -143,20 +154,22 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        int annoFile = Integer.parseInt(columns[3]);
+                        String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
-                        risultati = new ArrayList<Libro>();
                         Libro libro;
                         if(title.contains(titolo.getText())){
-                            libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                            libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
                     }
                     if(!(risultati.isEmpty())){
-                        ListaLibri l = new ListaLibri(risultati, u, libreria);                       
+                        ListaLibri l = new ListaLibri(risultati, u, libreria);      
+                        frame.dispose();                 
                     }else{
-                        JLabel label = new JLabel("Nessun risultato prodotto");
-                        frame.add(label); 
+                        label.setFont(new Font("Arial", Font.PLAIN, 15));
+                        label.setText("Nessun risultato prodotto");
+                        frame.revalidate();
+                        frame.repaint(); 
                     }
                 } catch (IOException z) {
                     z.printStackTrace();
@@ -176,20 +189,22 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        int annoFile = Integer.parseInt(columns[3]);
+                        String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
-                        risultati = new ArrayList<Libro>();
                         Libro libro;
                         if(author.contains(autore.getText())){
-                            libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                            libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
                     }
                     if(!(risultati.isEmpty())){
                         ListaLibri l = new ListaLibri(risultati, u, libreria);
+                        frame.dispose();
                     }else{
-                        JLabel label = new JLabel("Nessun risultato prodotto");
-                        frame.add(label); 
+                        label.setFont(new Font("Arial", Font.PLAIN, 15));
+                        label.setText("Nessun Risultato Prodotto");
+                        frame.revalidate();
+                        frame.repaint(); 
                     }
                 } catch (IOException z) {
                     z.printStackTrace();
@@ -209,20 +224,22 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        int annoFile = Integer.parseInt(columns[3]);
+                        String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
-                        risultati = new ArrayList<Libro>();
                         Libro libro;
-                        if((author.contains(autoreA.getText()) && (annoFile == Integer.parseInt(anno.getText())))){
-                            libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                        if((author.contains(autoreA.getText()) && (annoFileStr.equals(anno.getText())))){
+                            libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
                     }
                     if(!(risultati.isEmpty())){
                         ListaLibri l = new ListaLibri(risultati, u, libreria);
+                        frame.dispose();
                     }else{
-                        JLabel label = new JLabel("Nessun risultato prodotto");
-                        frame.add(label); 
+                        label.setFont(new Font("Arial", Font.PLAIN, 15));
+                        label.setText("Nessun Risultato Prodotto");
+                        frame.revalidate();
+                        frame.repaint(); 
                     }
                     
                 } catch (IOException z) {
@@ -243,20 +260,21 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        int annoFile = Integer.parseInt(columns[3]);
+                        String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
-                        risultati = new ArrayList<Libro>();
                         Libro libro;
                         if(title.contains(titolo.getText())){
-                            libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                            libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
                     }
                     if(!(risultati.isEmpty())){
-                        ListaLibri l = new ListaLibri(risultati, u);                       
+                        ListaLibri l = new ListaLibri(risultati, u); 
+                        frame.dispose();                      
                     }else{
-                        JLabel label = new JLabel("Nessun risultato prodotto");
-                        frame.add(label); 
+                        label.setFont(new Font("Arial", Font.PLAIN, 15));
+                        label.setText("Nessun risultato prodotto");
+                        frame.revalidate();
                     }
                 } catch (IOException z) {
                     z.printStackTrace();
@@ -276,20 +294,22 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        int annoFile = Integer.parseInt(columns[3]);
+                        String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
-                        risultati = new ArrayList<Libro>();
                         Libro libro;
                         if(author.contains(autore.getText())){
-                            libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                            libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
                     }
                     if(!(risultati.isEmpty())){
                         ListaLibri l = new ListaLibri(risultati, u);
+                        frame.dispose();
                     }else{
-                        JLabel label = new JLabel("Nessun risultato prodotto");
-                        frame.add(label); 
+                        label.setFont(new Font("Arial", Font.PLAIN, 15));
+                        label.setText("Nessun Risultato Prodotto");
+                        frame.revalidate();
+                        frame.repaint();
                     }
                 } catch (IOException z) {
                     z.printStackTrace();
@@ -309,32 +329,33 @@ public class CercaLibro implements ActionListener{
                         String isbn = columns[0];
                         String title = columns[1];
                         String author = columns[2];
-                        int annoFile = Integer.parseInt(columns[3]);
+                        String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
-                        risultati = new ArrayList<Libro>();
                         Libro libro;
-                        if((author.contains(autoreA.getText()) && (annoFile == Integer.parseInt(anno.getText())))){
-                            libro = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                        if((author.contains(autoreA.getText()) && (annoFileStr.equals(anno.getText())))){
+                            libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
                     }
                     if(!(risultati.isEmpty())){
                         ListaLibri l = new ListaLibri(risultati, u);
+                        frame.dispose();
                     }else{
-                        JLabel label = new JLabel("Nessun risultato prodotto");
-                        frame.add(label); 
+                        label.setFont(new Font("Arial", Font.PLAIN, 15));
+                        label.setText("Nessun Risultato Prodotto");
+                        frame.revalidate();
+                        frame.repaint();
                     }
                     
                 } catch (IOException z) {
                     z.printStackTrace();
                 }
-           {
-                if(u.getRegistrato()){
+            }else if(u.getRegistrato()){
                     GUI casa = new GUI(u);
+                    frame.dispose();
                 }else{
                     GUI casa = new GUI();
+                    frame.dispose();
                 }  
-            }
+            }  
 	}
-    }
-}

@@ -11,11 +11,12 @@ public class ListaLibri implements ActionListener{
     int i = 0;
     Utente u;
     Libreria libreria;
+    JFrame finestra;
 
 	public ListaLibri(){
-		JFrame finestra = new JFrame("Login");
+		finestra = new JFrame("Login");
 		finestra.setSize(990, 540);
-		finestra.setDeaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		finestra.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		finestra.setVisible(true);
 	}
 
@@ -23,19 +24,20 @@ public class ListaLibri implements ActionListener{
         u = utente;
         libreria = l;
 
-		JFrame finestra = new JFrame("Login");
+		finestra = new JFrame("ListaLibri");
 		finestra.setSize(990, 540);
-		finestra.setDeaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		finestra.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        finestra.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-        JPanel bottoni = JPanel();
+        JPanel bottoni = new JPanel();
         JButton succ = new JButton ("Successivo");
-        succ.addListener(this);
+        succ.addActionListener(this);
         JButton ped = new JButton ("Precedente");
-        ped.addListener(this);
+        ped.addActionListener(this);
         JButton visa = new JButton ("Visualizza il Libro");
-        visa.addListener(this);
+        visa.addActionListener(this);
         JButton homeList = new JButton("Home");
-        homeList.addListener(this);
+        homeList.addActionListener(this);
 
         listone = arg;
         Libro libro = listone.get(i);
@@ -49,7 +51,7 @@ public class ListaLibri implements ActionListener{
         grossa.add(libretto, BorderLayout.NORTH);
         grossa.add(bottoni, BorderLayout.CENTER);
 
-        finestra.add(homeList, BorderLayout.APPLET);
+        finestra.add(homeList, BorderLayout.NORTH);
         finestra.add(grossa, BorderLayout.CENTER);
 
 		finestra.setVisible(true);
@@ -58,19 +60,20 @@ public class ListaLibri implements ActionListener{
     public ListaLibri(ArrayList<Libro> arg, Utente utente){
         u = utente;
 
-		JFrame finestra = new JFrame("Login");
+		finestra = new JFrame("ListaLibri");
 		finestra.setSize(990, 540);
-		finestra.setDeaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		finestra.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        finestra.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-        JPanel bottoni = JPanel();
+        JPanel bottoni = new JPanel();
         JButton succ = new JButton ("Successivo");
-        succ.addListener(this);
+        succ.addActionListener(this);
         JButton ped = new JButton ("Precedente");
-        ped.addListener(this);
+        ped.addActionListener(this);
         JButton visa = new JButton ("Visualizza Libro");
-        visa.addListener(this);
+        visa.addActionListener(this);
         JButton homeList = new JButton("Home");
-        homeList.addListener(this);
+        homeList.addActionListener(this);
 
         listone = arg;
         Libro libro = listone.get(i);
@@ -84,41 +87,45 @@ public class ListaLibri implements ActionListener{
         grossa.add(libretto, BorderLayout.NORTH);
         grossa.add(bottoni, BorderLayout.CENTER);
 
-        finestra.add(homeList, BorderLayout.APPLET);
+        finestra.add(homeList, BorderLayout.NORTH);
         finestra.add(grossa, BorderLayout.CENTER);
 
 		finestra.setVisible(true);
 	}
 	
 	public static void main(String[] args){
-		Login ListaLibri = new ListaLibri();
+		Login ListaLibri = new Login();
 	}
 	
 	@Override
-    public void actionPerformed(ActionEvent e) throws IOException{
+    public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton)e.getSource();
             Libro l;
 			if(pulsante.getText().equals("Successivo")){
-                if(!(i+2>listone.getSize())){
+                if(!(i+2>listone.size())){
                     i++;
                     l=listone.get(i);
-                    libretto.setText(l.stampaLibro);
+                    libretto.setText(l.stampaLibro());
                 }
 			}else if(pulsante.getText().equals("Precedente")){
                 if(!(i-1<0)){
                     i--;
                     l=listone.get(i);
-                    libretto.setText(l.stampaLibro);	
+                    libretto.setText(l.stampaLibro());	
 			    }
             }else if(pulsante.getText().equals("Visualizza Libro")){
                 VisualizzaLibro v = new VisualizzaLibro(u, listone.get(i));
+                finestra.dispose();
             }else if(pulsante.getText().equals("Visualizza il Libro")){
                 VisualizzaLibro v = new VisualizzaLibro(u, listone.get(i), libreria);
+                finestra.dispose();
             }else{
                 if(u.getRegistrato()){
                     GUI homePage = new GUI(u);
+                    finestra.dispose();
                 }else{
                     GUI homePage = new GUI();
+                    finestra.dispose();
                 }
             }
     }

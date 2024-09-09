@@ -27,7 +27,7 @@ public class Libreria{
         String filePath = new File("Librerie.dati.csv").getAbsolutePath();
 		boolean isFirstLine = true;
         Libro[] libri;
-        Libreria l;
+        Libreria l = new Libreria();
 				
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String line;

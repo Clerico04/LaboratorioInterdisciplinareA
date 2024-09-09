@@ -26,7 +26,7 @@ public class VisualizzaLibreria implements ActionListener{
         JButton homeV = new JButton("Home");
         JPanel panel = new JPanel();
         aggiungiLibro.addActionListener(this);
-        homeL.addActionListener(this);
+        homeV.addActionListener(this);
 
         libreria = Libreria.getLibreria(nome, u.getId());
         libri = libreria.getElencoLibri();

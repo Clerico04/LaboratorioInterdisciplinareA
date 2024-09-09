@@ -12,8 +12,9 @@ public class Login implements ActionListener{
 	public Login(){
 		
 		login = new JFrame("Login");
-		login.setSize(990, 540);
+		login.setSize(960, 540);
 		login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		login.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		
 		JLabel domanda = new JLabel();
@@ -25,10 +26,7 @@ public class Login implements ActionListener{
 		nome = new JTextField(20);
 		password = new JTextField(20);
 		entrata.add(nome, BorderLayout.NORTH);
-		entrata.add(password, BorderLayout.CENTER);
-		login.add(nome);
-		login.add(password);
-		
+		entrata.add(password, BorderLayout.CENTER);	
 
 		JButton homeL = new JButton("Home");
 		JPanel homeP = new JPanel();
@@ -39,7 +37,7 @@ public class Login implements ActionListener{
 		entra.addActionListener(this);
 		entrata.add(entra, BorderLayout.SOUTH);
 		login.add(entrata);
-		
+
 		login.setVisible(true);
 		
 	}
@@ -52,11 +50,10 @@ public class Login implements ActionListener{
     public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton)e.getSource();
 
-
 			if(pulsante.getText().equals("Login")){
 				String id = nome.getText();
 				String pass = password.getText();
-				String filePath = new File("UtentiRegistrati.dati.txt").getAbsolutePath();
+				String filePath = new File("UtentiRegistrati.dati.csv").getAbsolutePath();
 				boolean isFirstLine = true;
 				
 				try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -71,11 +68,15 @@ public class Login implements ActionListener{
 						if((id.equals(columns[4])) && (pass.equals(columns[5]))){
 							Utente utente = new Utente(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5]);
 							GUI gui = new GUI(utente);
+							login.dispose();
 						}else{
 							nome.setText("");
 							password.setText("");
-							JLabel sbagliato = new JLabel("Nome utente o password errati");
+							JLabel sbagliato = new JLabel("");
+							sbagliato.setFont(new Font("Arial", Font.PLAIN, 15));
+							sbagliato.setText("Nome utente o password errati");
 							login.add(sbagliato);
+							login.validate();
 						}
 						
 					}
@@ -84,6 +85,7 @@ public class Login implements ActionListener{
 				} 
 			}else{
 				GUI homePage = new GUI();
+				login.dispose();
 			}
 
 	}

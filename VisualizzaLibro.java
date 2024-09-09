@@ -27,14 +27,14 @@ public class VisualizzaLibro implements ActionListener{
 
         JLabel informazioni = new JLabel();
         informazioni.setFont(new Font("Arial", Font.PLAIN, 20));
-        informazioni.setText(libro.StampaLibro());
+        informazioni.setText(libro.stampaLibro());
         frameV.add(informazioni);
 
         JButton dettagli = new JButton("Dettagli");
         JButton homeV = new JButton("Home");
         JPanel homeVPanel = new JPanel();
         homeV.addActionListener(this);
-        recensioni.addActionListener(this);
+        dettagli.addActionListener(this);
         homeVPanel.add(homeV, BorderLayout.EAST);
         
         frameV.add(dettagli); 
@@ -56,7 +56,7 @@ public class VisualizzaLibro implements ActionListener{
 
         JLabel informazioni = new JLabel();
         informazioni.setFont(new Font("Arial", Font.PLAIN, 20));
-        informazioni.setText(libro.StampaLibro());
+        informazioni.setText(libro.stampaLibro());
         frameV.add(informazioni);
 
         JButton dettagli = new JButton("Dettagli");
@@ -93,17 +93,8 @@ public class VisualizzaLibro implements ActionListener{
         if(pulsante.getText().equals("Dettagli")){
             dettagli = new JLabel();
             dettagli.setFont(new Font("Arial", Font.PLAIN, 20));
-            if(!(libro.valutato)){
-                dettagli.setText("Libro non ancora valutato, sii il primo! ");
-            }else{
-                dettagli.setText(Libro.leggiValutazione(libro));
-            }
-            if(!(libro.consigliato)){
-                dettagli.setText(dettagli.getText() + " I lettori non hanno ancora consigliato nessun libro per questo libro");
-            }else{
-                dettagli.setText(dettagli.getText() + " Libri Consigliati: " + Libro.leggiConsigli(libro));
-            }
-            dettagli.setText("");
+            dettagli.setText(Libro.leggiValutazione(libro));
+            dettagli.setText(dettagli.getText() + " Libri Consigliati: " + Libro.leggiConsigli(libro));
             frameV.add(dettagli);
         }else if(pulsante.getText().equals("Home")){
             if(u.getRegistrato()){
@@ -121,7 +112,7 @@ public class VisualizzaLibro implements ActionListener{
                 frameV.add(noRegistrato);
             } 
         }else if (pulsante.getText().equals("Inserisci valutazioni")){
-            if(U.getRegistrato()){
+            if(u.getRegistrato()){
                 Valutazioni v = new Valutazioni(libro, u);
             }else{
                 JLabel noRegistrato = new JLabel();
@@ -130,34 +121,30 @@ public class VisualizzaLibro implements ActionListener{
                 frameV.add(noRegistrato);
             }
         }else{
-            modificaLibreria("Librerie.dati.csv", [utente.getId(), lib.getTitolo()]);
-        }
-    }    
-
-    public static void modificaLibreria(String nomeFile, String[] chiavi) throws IOException {
+            modificaLibreria("Librerie.dati.csv", new String[]{u.getId() , libro.getTitolo()}, libro);
+        }    
+    }
+    
+    public static void modificaLibreria(String nomeFile, String[] chiavi, Libro book){
         ArrayList<String> righe = new ArrayList<String>();
         boolean rigaModificata = false;
         String nuovaRiga = "";
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(nomeFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(nomeFile))){
             String linea;
             while ((linea = reader.readLine()) != null) {
                 if ((linea.contains(chiavi[0])) && (linea.contains(chiavi[1])) && !rigaModificata) {
-                    nuovaRiga = linea + libro.getTitolo() + ";";
+                    nuovaRiga = linea + book.getTitolo() + ";";
                     righe.add(nuovaRiga); 
                     rigaModificata = true;
                 } else {
                     righe.add(linea);
                 }
             }
-        }
-
-        if (!rigaModificata) {
-            JLabel label = new JLabel();
-            label.setFont(new Font("Arial", Font.PLAIN, 15));
-            label.setText("Nessuna riga contenente la parola chiave \"" + parolaChiave + "\" è stata trovata.")
-            frameV.add(label);
-            return;
+        }catch(FileNotFoundException z){
+            z.printStackTrace();
+        }catch(IOException p){
+            p.printStackTrace();
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeFile))) {
@@ -165,6 +152,10 @@ public class VisualizzaLibro implements ActionListener{
                 writer.write(linea);
                 writer.newLine();
             }
+        }catch(FileNotFoundException z){
+            z.printStackTrace();
+        }catch(IOException p){
+            p.printStackTrace();
         }
     }    
-}        
+}       

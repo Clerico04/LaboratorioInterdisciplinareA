@@ -8,7 +8,7 @@ public class CreaLibreria implements ActionListener{
 
     Utente u;
     JTextField nomeLibreria;
-    JFrameL frameL;
+    JFrame frameL;
 
     public CreaLibreria(){
         JFrame frame = new JFrame();
@@ -51,15 +51,20 @@ public class CreaLibreria implements ActionListener{
             }
         }else{
             if(!(nomeLibreria.getText().equals(""))){
-                File librerieTxt = new File("Librerie.dati.csv");
-                FileWriter fileout = new FileWriter(librerieTxt);
-                BufferedWriter bw = new BufferedWriter(fileout);
-                bw.write(u.getId() + ";");
-                bw.write(nomeLibreria.getText() + ";");
-                bw.flush();
-                bw.close();
-                GUI homePage = new GUI(); 
-                LibreriaGUI lg = new LibreriaGUI(u);          
+                try{
+                    File librerieTxt = new File("Librerie.dati.csv");
+                    FileWriter fileout = new FileWriter(librerieTxt);
+                    BufferedWriter bw = new BufferedWriter(fileout);
+                    bw.write(u.getId() + ";");
+                    bw.write(nomeLibreria.getText() + ";");
+                    bw.flush();
+                    bw.close();
+                    GUI homePage = new GUI(); 
+                    LibreriaGUI lg = new LibreriaGUI(u);  
+                }catch(IOException z){
+                    z.printStackTrace();
+                }
+                        
             }
 
         }

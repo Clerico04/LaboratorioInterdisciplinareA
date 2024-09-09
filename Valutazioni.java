@@ -90,8 +90,7 @@ public class Valutazioni implements ActionListener{
 
             if((isNumeric(sVoto))  && ((Integer.parseInt(sVoto) >= 1) && (Integer.parseInt(sVoto) <= 5)) &&  (isNumeric(contenutoV))  && ((Integer.parseInt(contenutoV) >= 1) && (Integer.parseInt(contenutoV) <= 5)) && (isNumeric(gradevolezzaV))  && ((Integer.parseInt(gradevolezzaV) >= 1) && (Integer.parseInt(gradevolezzaV) <= 5)) && (isNumeric(originalitaV))  && ((Integer.parseInt(originalitaV) >= 1) && (Integer.parseInt(originalitaV) <= 5)) && (isNumeric(edizioneV))  && ((Integer.parseInt(edizioneV) >= 1) && (Integer.parseInt(edizioneV) <= 5))){
                    int votoFinale = Math.round((Integer.parseInt(sVoto) +  Integer.parseInt(contenutoV) + Integer.parseInt(gradevolezzaV) + Integer.parseInt(originalitaV) + Integer.parseInt(edizioneV))/5); 
-                   inserisciValutazioni(sVoto, stileG, contenutoV, contenutoG, gradevolezzaV, gradevolezzaG, originalitaV, originalitaG, edizioneV, edizioneG, votoFinale, votoFinaleGiudizio);
-                   l.setValutato(true);
+                   inserisciValutazioni(sVoto, stileG, contenutoV, contenutoG, gradevolezzaV, gradevolezzaG, originalitaV, originalitaG, edizioneV, edizioneG, Integer.toString(votoFinale), votoFinaleGiudizio);
                    GUI gui = new GUI(u);
             }else{
                 JLabel errore = new JLabel();
@@ -113,22 +112,26 @@ public class Valutazioni implements ActionListener{
 
     public void inserisciValutazioni(String votoS, String giudizioS, String votoC, String giudizioC, String votoG, String giudizioG, String votoO, String giudizioO, String votoE, String giudizioE, String votoF, String giudizioF){
                 File utentiRegistrati = new File("ValutazioniLibri.dati.csv");
-                FileWriter fileout = new FileWriter(utentiRegistrati);
-                BufferedWriter bw = new BufferedWriter(fileout);
-                bw.write(l.getTitolo()+";");
-                bw.write(votoS + ";");
-                bw.write(giudizioS + ";");
-                bw.write(votoC + ";");
-                bw.write(giudizioC + ";");
-                bw.write(votoG + ";");
-                bw.write(giudizioG);
-                bw.write(votoO + ";");
-                bw.write(giudizioO + ";");
-                bw.write(votoE + ";");
-                bw.write(giudizioE + ";");
-                bw.write(votoF + ";");
-                bw.write(giudizioF);
-                bw.flush();
-                bw.close();
+                try{
+                    FileWriter fileout = new FileWriter(utentiRegistrati);
+                    BufferedWriter bw = new BufferedWriter(fileout);
+                    bw.write(l.getTitolo()+";");
+                    bw.write(votoS + ";");
+                    bw.write(giudizioS + ";");
+                    bw.write(votoC + ";");
+                    bw.write(giudizioC + ";");
+                    bw.write(votoG + ";");
+                    bw.write(giudizioG);
+                    bw.write(votoO + ";");
+                    bw.write(giudizioO + ";");
+                    bw.write(votoE + ";");
+                    bw.write(giudizioE + ";");
+                    bw.write(votoF + ";");
+                    bw.write(giudizioF);
+                    bw.flush();
+                    bw.close();
+                }catch(IOException z){
+                    z.printStackTrace();
+                }
     }
 }
