@@ -20,6 +20,7 @@ public class CreaLibreria implements ActionListener{
         frameL = new JFrame("Crea Libreria");
 		frameL.setSize(990, 540);
 		frameL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frameL.setLayout(new FlowLayout(FlowLayout.CENTER));
         
 
         JButton homeL = new JButton("Home");
@@ -27,10 +28,12 @@ public class CreaLibreria implements ActionListener{
         homeL.addActionListener(this);
 
         nomeLibreria = new JTextField("nomeLibreria",20);
-        JButton creazione = new JButton("Invio");   
+        JButton creazione = new JButton("Invio");  
+        creazione.addActionListener(this); 
         
         panel.add(homeL, BorderLayout.WEST);
         panel.add(creazione, BorderLayout.EAST);
+        frameL.add(nomeLibreria, BorderLayout.CENTER);
         frameL.add(panel, BorderLayout.NORTH);
 
         frameL.setVisible(true);
@@ -46,25 +49,29 @@ public class CreaLibreria implements ActionListener{
         if(pulsante.getText() == "Home"){
             if(u.getRegistrato()){
                 GUI gui = new GUI(u);
+                frameL.dispose();
             }else{
                 GUI gui = new GUI();
+                frameL.dispose();
             }
         }else{
             if(!(nomeLibreria.getText().equals(""))){
                 try{
                     File librerieTxt = new File("Librerie.dati.csv");
-                    FileWriter fileout = new FileWriter(librerieTxt);
+                    FileWriter fileout = new FileWriter(librerieTxt, true);
                     BufferedWriter bw = new BufferedWriter(fileout);
+                    bw.newLine();
                     bw.write(u.getId() + ";");
                     bw.write(nomeLibreria.getText() + ";");
                     bw.flush();
                     bw.close();
-                    GUI homePage = new GUI(); 
                     LibreriaGUI lg = new LibreriaGUI(u);  
+                    frameL.dispose();
                 }catch(IOException z){
                     z.printStackTrace();
                 }
-                        
+                LibreriaGUI lg = new LibreriaGUI(u);
+                frameL.dispose();        
             }
 
         }

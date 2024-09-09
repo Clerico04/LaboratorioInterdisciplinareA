@@ -89,10 +89,10 @@ public class CercaLibro implements ActionListener{
 
         JPanel panel = new JPanel();
 
-        titolo = new JTextField(50);
-        autore = new JTextField(50);
-        autoreA = new JTextField(50);
-        anno = new JTextField(4);
+        titolo = new JTextField( "" , 50);
+        autore = new JTextField("", 50);
+        autoreA = new JTextField("", 50);
+        anno = new JTextField("", 4);
 
         JPanel piccolo1 = new JPanel();
         JPanel piccolo2 = new JPanel();
@@ -157,7 +157,7 @@ public class CercaLibro implements ActionListener{
                         String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
                         Libro libro;
-                        if(title.contains(titolo.getText())){
+                        if((title.contains(titolo.getText()) && !(titolo.getText().equals("")))){
                             libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
@@ -192,7 +192,7 @@ public class CercaLibro implements ActionListener{
                         String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
                         Libro libro;
-                        if(author.contains(autore.getText())){
+                        if((author.contains(autore.getText()) && !(autore.getText().equals(""))) ){
                             libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
@@ -227,7 +227,7 @@ public class CercaLibro implements ActionListener{
                         String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
                         Libro libro;
-                        if((author.contains(autoreA.getText()) && (annoFileStr.equals(anno.getText())))){
+                        if(((author.contains(autoreA.getText())) && (annoFileStr.equals(anno.getText())) && !(autoreA.getText().equals("")) && !(anno.getText().equals("")))){
                             libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
@@ -263,7 +263,7 @@ public class CercaLibro implements ActionListener{
                         String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
                         Libro libro;
-                        if(title.contains(titolo.getText())){
+                        if((title.contains(titolo.getText()) && !(titolo.getText().equals("")))){
                             libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
@@ -297,7 +297,7 @@ public class CercaLibro implements ActionListener{
                         String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
                         Libro libro;
-                        if(author.contains(autore.getText())){
+                        if((author.contains(autore.getText()) && !(autore.getText().equals(""))) ){
                             libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }
@@ -332,7 +332,7 @@ public class CercaLibro implements ActionListener{
                         String annoFileStr = columns[3].replace("\"", "");
                         String editore = columns[4];
                         Libro libro;
-                        if((author.contains(autoreA.getText()) && (annoFileStr.equals(anno.getText())))){
+                        if(((author.contains(autoreA.getText())) && (annoFileStr.equals(anno.getText())) && !(autoreA.getText().equals("")) && !(anno.getText().equals("")))){
                             libro = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                             risultati.add(libro);
                         }

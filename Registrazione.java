@@ -13,6 +13,8 @@ public class Registrazione implements ActionListener{
     JTextField username;
     JTextField password;
     JFrame registrazione;
+    JLabel esistente ;
+    JLabel riempi ;
         
     public Registrazione(){
 
@@ -20,6 +22,8 @@ public class Registrazione implements ActionListener{
         registrazione.setSize(990, 540);
 		registrazione.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         registrazione.setLayout(new FlowLayout(FlowLayout.CENTER));
+        esistente = new JLabel("");
+        riempi = new JLabel();
 
         JLabel chiedi = new JLabel();
 		chiedi.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -51,6 +55,8 @@ public class Registrazione implements ActionListener{
         JButton homeR = new JButton("Home");
         homeR.addActionListener(this);
         registrazione.add(homeR);
+        registrazione.add(esistente);
+        registrazione.add(riempi);
 
         registrazione.setVisible(true);
 
@@ -92,17 +98,13 @@ public class Registrazione implements ActionListener{
                                 GUI homePage = new GUI();
                                 registrazione.dispose();
                         }else{
-                            JLabel esistente = new JLabel("");
                             esistente.setFont(new Font("Arial", Font.PLAIN, 15));
                             esistente.setText("Nome utente o email gia' in uso");
-                            registrazione.add(esistente);
                             registrazione.validate();
                         }
                     }else{
-                        JLabel riempi = new JLabel();
                         riempi.setFont(new Font("Arial", Font.PLAIN, 15));
                         riempi.setText("Riempi tutti i campi");
-                        registrazione.add(riempi);
                         registrazione.validate();
                     }
                     }catch(IOException z){

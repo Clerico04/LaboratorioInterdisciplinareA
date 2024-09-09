@@ -66,11 +66,11 @@ public class Libreria{
                 String isbn = columns[0];
                 String title = columns[1];
                 String author = columns[2];
-                int annoFile = Integer.parseInt(columns[3]);
+                String annoFileStr = columns[3].replace("\"", "");
                 String editore = columns[4];
                 Libro cercato;
                 if(title.equals(tit)){
-                    cercato = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                    cercato = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                     return cercato;
                 }
             }

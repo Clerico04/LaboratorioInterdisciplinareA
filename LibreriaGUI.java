@@ -19,15 +19,21 @@ public class LibreriaGUI implements ActionListener{
         frameL = new JFrame("Librerie");
 		frameL.setSize(990, 540);
 		frameL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frameL.setLayout(new FlowLayout(FlowLayout.CENTER));
         
 
         JButton homeL = new JButton("Home");
         JButton creazione = new JButton("Crea Libreria");
+        creazione.addActionListener(this);
         JPanel panel = new JPanel();
         homeL.addActionListener(this);
 
         ArrayList<Libreria> librerie = leggiLibrerie(u);
 
+        panel.add(homeL, BorderLayout.WEST);
+        panel.add(creazione, BorderLayout.EAST);
+        frameL.add(panel);
+        
         JButton bottone;
         for(Libreria l : librerie){
             bottone = new JButton(l.getTitolo());
@@ -35,10 +41,6 @@ public class LibreriaGUI implements ActionListener{
             frameL.add(bottone);
         }        
         
-        panel.add(homeL, BorderLayout.WEST);
-        panel.add(creazione, BorderLayout.EAST);
-        frameL.add(panel, BorderLayout.NORTH);
-
         frameL.setVisible(true);
     }
   
@@ -53,14 +55,18 @@ public class LibreriaGUI implements ActionListener{
 		JButton pulsante = (JButton)e.getSource();
         if(pulsante.getText() == "Crea Libreria"){
             CreaLibreria cl = new CreaLibreria(u);
+            frameL.dispose();
         }else if(pulsante.getText() == "Home"){
             if(u.getRegistrato()){
                 GUI home = new GUI(u);
+                frameL.dispose();
             }else{
                 GUI home = new GUI();
+                frameL.dispose();
             }
         }else{
             VisualizzaLibreria libreriaV = new VisualizzaLibreria(pulsante.getText(), u);
+            frameL.dispose();
         }
 	}
 
@@ -107,11 +113,11 @@ public class LibreriaGUI implements ActionListener{
                 String isbn = columns[0];
                 String title = columns[1];
                 String author = columns[2];
-                int annoFile = Integer.parseInt(columns[3]);
+                String annoFileStr = columns[3].replace("\"", "");
                 String editore = columns[4];
                 Libro cercato;
                 if(title.equals(titolo)){
-                    cercato = new Libro(columns[1], columns[2], Integer.parseInt(columns[3]), columns[4]);
+                    cercato = new Libro(columns[1], columns[2], annoFileStr, columns[4]);
                     return cercato;
                 }
             }

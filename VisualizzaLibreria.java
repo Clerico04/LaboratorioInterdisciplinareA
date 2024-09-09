@@ -9,6 +9,7 @@ public class VisualizzaLibreria implements ActionListener{
     Utente u;
     Libro[] libri;
     Libreria libreria;
+    JFrame frameV;
 
     public VisualizzaLibreria(){
         JFrame f = new JFrame();
@@ -17,9 +18,10 @@ public class VisualizzaLibreria implements ActionListener{
     public VisualizzaLibreria(String nome, Utente utente){
         u = utente;
 
-        JFrame frameV = new JFrame("Visualizza libreria");
-		frameV.setSize(990, 540);
+        frameV = new JFrame("Visualizza libreria");
+		frameV.setSize(1920, 1080);
 		frameV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frameV.setLayout(new FlowLayout(FlowLayout.CENTER));
         
 
         JButton aggiungiLibro = new JButton("Aggiungi libro");
@@ -31,6 +33,10 @@ public class VisualizzaLibreria implements ActionListener{
         libreria = Libreria.getLibreria(nome, u.getId());
         libri = libreria.getElencoLibri();
 
+        panel.add(aggiungiLibro, BorderLayout.CENTER);
+        panel.add(homeV, BorderLayout.WEST);
+        frameV.add(panel);
+
         JButton bottone;
         for(Libro l : libri){
             bottone = new JButton(l.getTitolo());
@@ -38,9 +44,6 @@ public class VisualizzaLibreria implements ActionListener{
             frameV.add(bottone);
         }
         
-        panel.add(homeV, BorderLayout.NORTH);
-        frameV.add(panel, BorderLayout.NORTH);
-
         frameV.setVisible(true);
     }
 
@@ -53,10 +56,12 @@ public class VisualizzaLibreria implements ActionListener{
 		JButton pulsante = (JButton)e.getSource();
         if(pulsante.getText().equals("Home")){
             GUI gui = new GUI(u);
+            frameV.dispose();
         }else if(pulsante.getText().equals("Aggiungi libro")){
             CercaLibro cl = new CercaLibro(u, libreria);
+            frameV.dispose();
         }else{
-            Libro temp;
+            Libro temp = new Libro();
             String t = pulsante.getText();
             for(Libro l : libri){
                 if(l.getTitolo() == t){
@@ -64,6 +69,7 @@ public class VisualizzaLibreria implements ActionListener{
                 }
             }
             VisualizzaLibro libroScelto = new VisualizzaLibro(u, temp, libreria);
+            frameV.dispose();
         }
 	}
 }

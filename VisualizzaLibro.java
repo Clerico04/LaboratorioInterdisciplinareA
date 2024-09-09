@@ -8,9 +8,11 @@ public class VisualizzaLibro implements ActionListener{
 
     Utente u;
     Libro libro;
-    JLabel dettagli;
+    JLabel det;
     Libreria lib;
     JFrame frameV;
+    JLabel noRegistrato = new JLabel();
+    JTextArea textArea;
 
     public VisualizzaLibro(){
         JFrame frame = new JFrame();
@@ -18,12 +20,23 @@ public class VisualizzaLibro implements ActionListener{
 
     public VisualizzaLibro(Utente utente, Libro l){
         u = utente;
-        dettagli = new JLabel();
+        det = new JLabel();
         libro = l;
+        noRegistrato = new JLabel();
+
+        textArea = new JTextArea(10, 43);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+
+        textArea.setFont(new Font("Arial", Font.PLAIN, 14));
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
 
         frameV = new JFrame("Cerca Libro");
-		frameV.setSize(990, 540);
+		frameV.setSize(1920, 1080);
 		frameV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frameV.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JLabel informazioni = new JLabel();
         informazioni.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -38,7 +51,10 @@ public class VisualizzaLibro implements ActionListener{
         homeVPanel.add(homeV, BorderLayout.EAST);
         
         frameV.add(dettagli); 
-        frameV.add(homeVPanel, BorderLayout.NORTH);
+        frameV.add(homeVPanel);
+        frameV.add(det);
+        frameV.add(noRegistrato);  
+        frameV.add(scrollPane); 
 
         frameV.setVisible(true);
     }
@@ -46,13 +62,24 @@ public class VisualizzaLibro implements ActionListener{
 
     public VisualizzaLibro(Utente utente, Libro l, Libreria libreria){
         u = utente;
-        dettagli = new JLabel();;
+        det = new JLabel();
         libro = l;
         lib = libreria;
 
+        textArea = new JTextArea(10, 45);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+
+        textArea.setFont(new Font("Arial", Font.PLAIN, 14));
+
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
         frameV = new JFrame("Visualizza Libro");
-		frameV.setSize(990, 540);
+		frameV.setSize(1920, 1080);
 		frameV.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frameV.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JLabel informazioni = new JLabel();
         informazioni.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -77,7 +104,9 @@ public class VisualizzaLibro implements ActionListener{
         homeVPanel.add(aggiungi, BorderLayout.SOUTH);
         
         frameV.add(dettagli); 
-        frameV.add(homeVPanel, BorderLayout.NORTH);
+        frameV.add(homeVPanel);
+        /*frameV.add(det); */
+        frameV.add(scrollPane); 
 
         frameV.setVisible(true);
     }
@@ -91,37 +120,45 @@ public class VisualizzaLibro implements ActionListener{
     public void actionPerformed(ActionEvent e){
 		JButton pulsante = (JButton)e.getSource();  
         if(pulsante.getText().equals("Dettagli")){
-            dettagli = new JLabel();
-            dettagli.setFont(new Font("Arial", Font.PLAIN, 20));
-            dettagli.setText(Libro.leggiValutazione(libro));
-            dettagli.setText(dettagli.getText() + " Libri Consigliati: " + Libro.leggiConsigli(libro));
-            frameV.add(dettagli);
+           /*det.setFont(new Font("Arial", Font.PLAIN, 20));
+            det.setText("");
+            det.setText(Libro.leggiValutazione(libro));
+            det.setText(det.getText() + " Libri Consigliati: " + Libro.leggiConsigli(libro));*/
+            textArea.setText(Libro.leggiValutazione(libro) + " CONSIGLI: " + Libro.leggiConsigli(libro));
+            frameV.validate();
+            frameV.repaint();
         }else if(pulsante.getText().equals("Home")){
             if(u.getRegistrato()){
-                GUI g = new GUI(u);            
+                GUI g = new GUI(u); 
+                frameV.dispose();           
             }else{
                 GUI g = new GUI();
+                frameV.dispose();
             }
         }else if(pulsante.getText().equals("Inserisci consigli")){
             if(u.getRegistrato()){
                 Consigli c = new Consigli(libro,lib,u);
+                frameV.dispose();
             }else{
-                JLabel noRegistrato = new JLabel();
                 noRegistrato.setFont(new Font("Arial", Font.PLAIN, 15));
                 noRegistrato.setText("Solo gli utenti registrati possono inserire valutazioni");
-                frameV.add(noRegistrato);
+                frameV.validate();
             } 
         }else if (pulsante.getText().equals("Inserisci valutazioni")){
             if(u.getRegistrato()){
                 Valutazioni v = new Valutazioni(libro, u);
+                frameV.dispose();
             }else{
-                JLabel noRegistrato = new JLabel();
                 noRegistrato.setFont(new Font("Arial", Font.PLAIN, 15));
                 noRegistrato.setText("Solo gli utenti registrati possono inserire valutazioni");
-                frameV.add(noRegistrato);
+                frameV.validate();
             }
         }else{
-            modificaLibreria("Librerie.dati.csv", new String[]{u.getId() , libro.getTitolo()}, libro);
+            if(!(existence(libro.getTitolo()))){
+                modificaLibreria("Librerie.dati.csv", new String[]{u.getId() , lib.getTitolo()}, libro);
+            }
+            GUI h = new GUI(u);
+            frameV.dispose();
         }    
     }
     
@@ -157,5 +194,15 @@ public class VisualizzaLibro implements ActionListener{
         }catch(IOException p){
             p.printStackTrace();
         }
-    }    
+    } 
+
+    public boolean existence(String titolone){
+        Libro[] el = lib.getElencoLibri();
+        for(Libro j:el){
+            if(j.getTitolo().equals(titolone)){
+                return true;
+            }
+        }
+        return false;
+    }   
 }       

@@ -10,18 +10,18 @@ public class Valutazioni implements ActionListener{
     JFrame frame;
     Utente u;
     Libro l;
-    JTextField stileVoto = new JTextField("Inserisci voto per lo stile (da 1 a 5)", 50);
-    JTextField stileGiudizio = new JTextField("Inserisci giudizio per lo stile (massimo 256 caratteri)", 100);
-    JTextField contenutoVoto = new JTextField("Inserisci voto per il contenuto (da 1 a 5)", 50);
-    JTextField contenutoGiudizio = new JTextField("Inserisci giudizio per il contenuto (massimo 256 caratteri)", 100);
-    JTextField gradevolezzaVoto = new JTextField("Inserisci voto per la gradevolezza (da 1 a 5)", 50);
-    JTextField gradevolezzaGiudizio = new JTextField("Inserisci giudizio per la gradevolezza (massimo 256 caratteri)", 100);
-    JTextField originalitaVoto = new JTextField("Inserisci voto per l'orignalità (da 1 a 5)", 50);
-    JTextField originalitaGiudizio = new JTextField("Inserisci giudizio per l'originalità (massimo 256 caratteri)", 100);
-    JTextField edizioneVoto = new JTextField("Inserisci voto per l'edizione (da 1 a 5)", 50);
-    JTextField edizioneGiudizio = new JTextField("Inserisci giudizio per l'edizione (massimo 256 caratteri)", 100);
-    JTextField votoFinal = new JTextField("Il voto finale verrà calcolato come media degli altri voti", 50);
-    JTextField giudizioFinale = new JTextField("Inserisci un giudizio complessivo per questo libro (massimo 256 caratteri)", 100);
+    JTextField stileVoto = new JTextField("Inserisci voto per lo stile (da 1 a 5)", 25);
+    JTextField stileGiudizio = new JTextField("Inserisci giudizio per lo stile (massimo 256 caratteri)", 25);
+    JTextField contenutoVoto = new JTextField("Inserisci voto per il contenuto (da 1 a 5)", 25);
+    JTextField contenutoGiudizio = new JTextField("Inserisci giudizio per il contenuto (massimo 256 caratteri)", 25);
+    JTextField gradevolezzaVoto = new JTextField("Inserisci voto per la gradevolezza (da 1 a 5)", 25);
+    JTextField gradevolezzaGiudizio = new JTextField("Inserisci giudizio per la gradevolezza (massimo 256 caratteri)", 25);
+    JTextField originalitaVoto = new JTextField("Inserisci voto per l'orignalità (da 1 a 5)", 25);
+    JTextField originalitaGiudizio = new JTextField("Inserisci giudizio per l'originalità (massimo 256 caratteri)", 25);
+    JTextField edizioneVoto = new JTextField("Inserisci voto per l'edizione (da 1 a 5)", 25);
+    JTextField edizioneGiudizio = new JTextField("Inserisci giudizio per l'edizione (massimo 256 caratteri)", 25);
+    JTextField votoFinal = new JTextField("Il voto finale verrà calcolato come media degli altri voti", 25);
+    JTextField giudizioFinale = new JTextField("Inserisci un giudizio complessivo per questo libro (massimo 256 caratteri)", 25);
 
     public Valutazioni(){
         frame = new JFrame();
@@ -32,8 +32,9 @@ public class Valutazioni implements ActionListener{
         l=libro;
 
         frame = new JFrame("Valuta Libro");
-		frame.setSize(990, 540);
+		frame.setSize(1920, 1080);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout(FlowLayout.CENTER));
         
 
         JButton home = new JButton("Home");
@@ -75,6 +76,7 @@ public class Valutazioni implements ActionListener{
 		JButton pulsante = (JButton)e.getSource();
         if(pulsante.getText() == "Home"){
                 GUI gui = new GUI(u);
+                frame.dispose();
 		}else{
             String sVoto = stileVoto.getText();
             String stileG = stileGiudizio.getText();
@@ -92,6 +94,7 @@ public class Valutazioni implements ActionListener{
                    int votoFinale = Math.round((Integer.parseInt(sVoto) +  Integer.parseInt(contenutoV) + Integer.parseInt(gradevolezzaV) + Integer.parseInt(originalitaV) + Integer.parseInt(edizioneV))/5); 
                    inserisciValutazioni(sVoto, stileG, contenutoV, contenutoG, gradevolezzaV, gradevolezzaG, originalitaV, originalitaG, edizioneV, edizioneG, Integer.toString(votoFinale), votoFinaleGiudizio);
                    GUI gui = new GUI(u);
+                   frame.dispose();
             }else{
                 JLabel errore = new JLabel();
                 errore.setFont(new Font("Arial", Font.BOLD, 15));
@@ -113,21 +116,46 @@ public class Valutazioni implements ActionListener{
     public void inserisciValutazioni(String votoS, String giudizioS, String votoC, String giudizioC, String votoG, String giudizioG, String votoO, String giudizioO, String votoE, String giudizioE, String votoF, String giudizioF){
                 File utentiRegistrati = new File("ValutazioniLibri.dati.csv");
                 try{
-                    FileWriter fileout = new FileWriter(utentiRegistrati);
+                    FileWriter fileout = new FileWriter(utentiRegistrati, true);
                     BufferedWriter bw = new BufferedWriter(fileout);
+                    bw.newLine();
                     bw.write(l.getTitolo()+";");
                     bw.write(votoS + ";");
-                    bw.write(giudizioS + ";");
+                    if(giudizioS.equals("")){
+                        bw.write(" " + ";");
+                    }else{
+                        bw.write(giudizioS + ";");
+                    }
                     bw.write(votoC + ";");
-                    bw.write(giudizioC + ";");
+                    if(giudizioC.equals("")){
+                        bw.write(" " + ";");
+                    }else{
+                        bw.write(giudizioC + ";");                     
+                    }
                     bw.write(votoG + ";");
-                    bw.write(giudizioG);
+                    if(giudizioG.equals("")){
+                        bw.write(" " + ";");
+                    }else{
+                        bw.write(giudizioG + ";");
+                    }
                     bw.write(votoO + ";");
-                    bw.write(giudizioO + ";");
+                    if(giudizioO.equals("")){
+                        bw.write(" " + ";");
+                    }else{
+                        bw.write(giudizioO + ";");
+                    }
                     bw.write(votoE + ";");
-                    bw.write(giudizioE + ";");
+                    if(giudizioE.equals("")){
+                        bw.write(" " + ";");
+                    }else{
+                        bw.write(giudizioE + ";");
+                    }
                     bw.write(votoF + ";");
-                    bw.write(giudizioF);
+                    if(giudizioF.equals("")){
+                        bw.write(" " + ";");
+                    }else{
+                        bw.write(giudizioF+";");
+                    }
                     bw.flush();
                     bw.close();
                 }catch(IOException z){

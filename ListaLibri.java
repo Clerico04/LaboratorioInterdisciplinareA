@@ -15,7 +15,7 @@ public class ListaLibri implements ActionListener{
 
 	public ListaLibri(){
 		finestra = new JFrame("Login");
-		finestra.setSize(990, 540);
+		finestra.setSize(1920, 1080);
 		finestra.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		finestra.setVisible(true);
 	}
@@ -25,7 +25,7 @@ public class ListaLibri implements ActionListener{
         libreria = l;
 
 		finestra = new JFrame("ListaLibri");
-		finestra.setSize(990, 540);
+		finestra.setSize(1920, 1080);
 		finestra.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         finestra.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
@@ -61,7 +61,7 @@ public class ListaLibri implements ActionListener{
         u = utente;
 
 		finestra = new JFrame("ListaLibri");
-		finestra.setSize(990, 540);
+		finestra.setSize(1920, 1080);
 		finestra.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         finestra.setLayout(new FlowLayout(FlowLayout.CENTER));
 		

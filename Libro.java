@@ -96,10 +96,10 @@ public class Libro{
                 contaO = contaO/conta;
                 contaE = contaE/conta;
                 contaVF = contaVF/conta;
-                stampa = "Libro valutato " + conta + " volte" +"\nStile: " +  contaS + "Contenuto: " + contaC + "Gradevolezza: " + contaG + "Originalita: " + contaO + "Edizione: " + contaE + "Voto Finale" + contaVF +"/n";
-                stampa += "Note Stile: " +  leggiList(noteStile) + "Note Contenuto: " + leggiList(noteContenuto) + "Note Gradevolezza: " + leggiList(noteGradevolezza) + "Note Originalita: " + leggiList(noteOriginalita) + "Note Edizione: " + leggiList(noteEdizione) + "Note Voto Finale" + leggiList(noteVotoFinale) + "\n";
+                stampa = "Libro valutato " + conta + " volte" +"\nStile: " +  contaS + " Contenuto: " + contaC + " Gradevolezza: " + contaG + " Originalita: " + contaO + " Edizione: " + contaE + " Voto Finale: " + contaVF ;
+                stampa += " Note Stile: " +  leggiList(noteStile) + "Note Contenuto: " + leggiList(noteContenuto) + "Note Gradevolezza: " + leggiList(noteGradevolezza) + "Note Originalita: " + leggiList(noteOriginalita) + "Note Edizione: " + leggiList(noteEdizione) + "Note Voto Finale" + leggiList(noteVotoFinale) + " ";
             }else{
-                stampa = "Libro non ancora valutato, sii il primo! " + "/n";
+                stampa = "Libro non ancora valutato, sii il primo! " + " ";
             }
                 return stampa;
         } catch (IOException z) {
@@ -140,35 +140,38 @@ public class Libro{
 
                 if(title.equals(libro.getTitolo())){
                     if(!(c1.equals("Nessun consiglio"))){
-                        if(!(advice.contains(c1))){
-                            temp = conta.get(advice.indexOf(c1));
+                        if(advice.contains(c1)){
+                            int index = advice.indexOf(c1);
+                            temp = conta.get(index);
                             temp++;
-                            temporanea = conta.set(advice.indexOf(c1), temp);
+                            conta.set(index, temp);
                         }else{
                             advice.add(c1);
-                            conta.add(advice.indexOf(c1), 1);
+                            conta.add(1);
                         }    
                     }
 
                     if(!(c2.equals("Nessun consiglio"))){
-                        if(!(advice.contains(c2))){
-                            temp = conta.get(advice.indexOf(c2));
+                        if(advice.contains(c2)){
+                            int index = advice.indexOf(c2);
+                            temp = conta.get(index);
                             temp++;
-                            temporanea = conta.set(advice.indexOf(c2), temp);
+                            conta.set(index, temp);
                         }else{
                             advice.add(c2);
-                            conta.add(advice.indexOf(c2), 1);
+                            conta.add(1);
                         }    
                     }
 
                     if(!(c3.equals("Nessun consiglio"))){
-                        if(!(advice.contains(c3))){
-                            temp = conta.get(advice.indexOf(c3));
+                        if(advice.contains(c3)){
+                            int index = advice.indexOf(c3);
+                            temp = conta.get(index);
                             temp++;
-                            temporanea = conta.set(advice.indexOf(c3), temp);
+                            conta.set(index, temp);
                         }else{
                             advice.add(c3);
-                            conta.add(advice.indexOf(c3), 1);
+                            conta.add(1);
                         }    
                     }
                     
