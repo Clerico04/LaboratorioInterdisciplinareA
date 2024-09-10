@@ -35,7 +35,7 @@ public class LibreriaGUI implements ActionListener{
         u = utente;
 
         frameL = new JFrame("Librerie");
-		frameL.setSize(990, 540);
+		frameL.setSize(1920, 1080);
 		frameL.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frameL.setLayout(new FlowLayout(FlowLayout.CENTER));
         
@@ -95,7 +95,7 @@ public class LibreriaGUI implements ActionListener{
      * @return Una lista di oggetti Libreria associati all'utente.
      */
     public ArrayList<Libreria> leggiLibrerie(Utente utente){
-        String filePath = new File("Librerie.dati.csv").getAbsolutePath();
+        String filePath = new File("../data/Librerie.dati.csv").getAbsolutePath();
 		boolean isFirstLine = true;
         ArrayList<Libreria> arg = new ArrayList<Libreria>();
         Libro[] libri;
@@ -130,7 +130,7 @@ public class LibreriaGUI implements ActionListener{
      * @return Un oggetto Libro se trovato, altrimenti null.
      */
     public Libro trovaLibroTitolo (String titolo){
-        String filePath = new File("Libri.dati.csv").getAbsolutePath();
+        String filePath = new File("../data/Libri.dati.csv").getAbsolutePath();
         boolean isFirstLine = true;
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";

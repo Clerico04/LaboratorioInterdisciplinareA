@@ -69,7 +69,7 @@ public class Login implements ActionListener{
 			if(pulsante.getText().equals("Login")){
 				String id = nome.getText();
 				String pass = password.getText();
-				String filePath = new File("UtentiRegistrati.dati.csv").getAbsolutePath();
+				String filePath = new File("../data/UtentiRegistrati.dati.csv").getAbsolutePath();
 				boolean isFirstLine = true;
 				
 				try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

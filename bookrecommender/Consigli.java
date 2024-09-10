@@ -145,7 +145,7 @@ public class Consigli implements ActionListener{
      * @throws IOException Se si verifica un errore durante la scrittura nel file
      */
     public void inserisciConsigli(String[] advice) throws IOException{
-        File utentiRegistrati = new File("ConsigliLibri.dati.csv");
+        File utentiRegistrati = new File("../data/ConsigliLibri.dati.csv");
         try{
             FileWriter fileout = new FileWriter(utentiRegistrati, true);
             BufferedWriter bw = new BufferedWriter(fileout);

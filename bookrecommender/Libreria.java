@@ -54,7 +54,7 @@ public class Libreria{
      * @return La libreria corrispondente al nome e all'utente specificati, o una libreria vuota se non trovata.
      */
     public static Libreria getLibreria(String nomeLibreria, String username){
-        String filePath = new File("Librerie.dati.csv").getAbsolutePath();
+        String filePath = new File("../data/Librerie.dati.csv").getAbsolutePath();
 		boolean isFirstLine = true;
         Libro[] libri;
         Libreria l = new Libreria();
@@ -89,7 +89,7 @@ public class Libreria{
      * @return Un oggetto Libro se trovato, altrimenti null.
      */
     public static Libro searchBookTitle (String tit){
-        String filePath = new File("Libri.dati.csv").getAbsolutePath();
+        String filePath = new File("../data/Libri.dati.csv").getAbsolutePath();
         boolean isFirstLine = true;
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = "";

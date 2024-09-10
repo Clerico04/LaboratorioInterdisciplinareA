@@ -178,7 +178,7 @@ public class VisualizzaLibro implements ActionListener{
             }
         }else{
             if(!(existence(libro.getTitolo()))){
-                modificaLibreria("Librerie.dati.csv", new String[]{u.getId() , lib.getTitolo()}, libro);
+                modificaLibreria("../data/Librerie.dati.csv", new String[]{u.getId() , lib.getTitolo()}, libro);
             }
             GUI h = new GUI(u);
             frameV.dispose();

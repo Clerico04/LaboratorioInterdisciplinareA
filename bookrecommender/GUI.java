@@ -128,7 +128,7 @@ public class GUI implements ActionListener{
 				home.dispose();	
 			}else if(pulsante.getText() == "Librerie"){
 				if(u.getRegistrato()){
-					LibreriaGUI puzzo = new LibreriaGUI(u);
+					LibreriaGUI lib = new LibreriaGUI(u);
 					home.dispose();
 				}else{
 					JLabel registrati = new JLabel();

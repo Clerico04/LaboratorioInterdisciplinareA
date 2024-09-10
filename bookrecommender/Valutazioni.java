@@ -158,7 +158,7 @@ public class Valutazioni implements ActionListener{
      * @param giudizioF Giudizio complessivo per il libro.
      */
     public void inserisciValutazioni(String votoS, String giudizioS, String votoC, String giudizioC, String votoG, String giudizioG, String votoO, String giudizioO, String votoE, String giudizioE, String votoF, String giudizioF){
-                File utentiRegistrati = new File("ValutazioniLibri.dati.csv");
+                File utentiRegistrati = new File("../data/ValutazioniLibri.dati.csv");
                 try{
                     FileWriter fileout = new FileWriter(utentiRegistrati, true);
                     BufferedWriter bw = new BufferedWriter(fileout);

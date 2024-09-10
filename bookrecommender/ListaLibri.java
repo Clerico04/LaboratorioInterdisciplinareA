@@ -28,7 +28,7 @@ public class ListaLibri implements ActionListener{
      * Costruttore che crea una finestra di login con dimensioni predefinite.
      */
 	public ListaLibri(){
-		finestra = new JFrame("Login");
+		finestra = new JFrame("Lista Libri");
 		finestra.setSize(1920, 1080);
 		finestra.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		finestra.setVisible(true);

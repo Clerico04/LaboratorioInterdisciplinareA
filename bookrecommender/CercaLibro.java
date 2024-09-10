@@ -179,7 +179,7 @@ public class CercaLibro implements ActionListener{
     public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton) e.getSource();
              if(pulsante.getText().equals("RicercaTitolo")){
-                String filePath = new File("Libri.dati.csv").getAbsolutePath();
+                String filePath = new File("../data/Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
                 ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -214,7 +214,7 @@ public class CercaLibro implements ActionListener{
                     z.printStackTrace();
                 }
             }else if(pulsante.getText().equals("RicercaAutore")){
-                String filePath = new File("Libri.dati.csv").getAbsolutePath();
+                String filePath = new File("../data/Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
                 ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -249,7 +249,7 @@ public class CercaLibro implements ActionListener{
                     z.printStackTrace();
                 }
             }else if(pulsante.getText().equals("RicercaAutAnno")){
-                String filePath = new File("Libri.dati.csv").getAbsolutePath();
+                String filePath = new File("../data/Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
                 ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -285,7 +285,7 @@ public class CercaLibro implements ActionListener{
                     z.printStackTrace();
                 }
            }else if(pulsante.getText().equals("RicercaPerTitolo")){
-                String filePath = new File("Libri.dati.csv").getAbsolutePath();
+                String filePath = new File("../data/Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
                 ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -319,7 +319,7 @@ public class CercaLibro implements ActionListener{
                     z.printStackTrace();
                 }
             }else if(pulsante.getText().equals("RicercaPerAutore")){
-                String filePath = new File("Libri.dati.csv").getAbsolutePath();
+                String filePath = new File("../data/Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
                 ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -354,7 +354,7 @@ public class CercaLibro implements ActionListener{
                     z.printStackTrace();
                 }
             }else if(pulsante.getText().equals("RicercaPerAutAnno")){
-                String filePath = new File("Libri.dati.csv").getAbsolutePath();
+                String filePath = new File("../data/Libri.dati.csv").getAbsolutePath();
                 boolean isFirstLine = true;
                 ArrayList<Libro> risultati = new ArrayList<Libro>();
                 try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

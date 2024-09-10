@@ -83,7 +83,7 @@ public class CreaLibreria implements ActionListener{
         }else{
             if(!(nomeLibreria.getText().equals(""))){
                 try{
-                    File librerieTxt = new File("Librerie.dati.csv");
+                    File librerieTxt = new File("../data/Librerie.dati.csv");
                     FileWriter fileout = new FileWriter(librerieTxt, true);
                     BufferedWriter bw = new BufferedWriter(fileout);
                     bw.newLine();

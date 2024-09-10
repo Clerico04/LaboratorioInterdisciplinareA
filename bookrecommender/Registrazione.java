@@ -34,7 +34,7 @@ public class Registrazione implements ActionListener{
     public Registrazione(){
 
         registrazione = new JFrame("Registrazione");
-        registrazione.setSize(990, 540);
+        registrazione.setSize(1920, 1080);
 		registrazione.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         registrazione.setLayout(new FlowLayout(FlowLayout.CENTER));
         esistente = new JLabel("");
@@ -96,7 +96,7 @@ public class Registrazione implements ActionListener{
                 try{
                     if((name.length()>0) && (surname.length()>0) && (codice.length()>0) && (mail.length()>0) && (id.length()>0)){
                         if((pass.length()>0) && (!esistenza(id, 4)) && (!esistenza(mail, 3))){
-                                File utentiRegistrati = new File("UtentiRegistrati.dati.csv");
+                                File utentiRegistrati = new File("../data/UtentiRegistrati.dati.csv");
                                 FileWriter fileout = new FileWriter(utentiRegistrati, true);
                                 BufferedWriter bw = new BufferedWriter(fileout);
 
@@ -140,7 +140,7 @@ public class Registrazione implements ActionListener{
      * @return true se il dato esiste già, false altrimenti.
      */
     private static boolean esistenza(String id, int colonna){
-        String filePath = new File("UtentiRegistrati.dati.csv").getAbsolutePath();
+        String filePath = new File("../data/UtentiRegistrati.dati.csv").getAbsolutePath();
         boolean isFirstLine = true;
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

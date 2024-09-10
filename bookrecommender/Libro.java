@@ -45,11 +45,11 @@ public class Libro{
     /**
      * Confronta questo libro con un altro libro per verificare se sono uguali.
      *
-     * @param altro Il libro da confrontare.
+     * @param book Il libro da confrontare.
      * @return true se i libri hanno lo stesso titolo, autore, anno ed editore; false altrimenti.
      */
-    public boolean equals(Libro homosexual){
-        return ((this.titolo.equals(homosexual.titolo)) && (this.autore.equals(homosexual.autore)) && (this.anno.equals(homosexual.anno)) && (this.editore.equals(homosexual.editore)));
+    public boolean equals(Libro book){
+        return ((this.titolo.equals(book.titolo)) && (this.autore.equals(book.autore)) && (this.anno.equals(book.anno)) && (this.editore.equals(book.editore)));
     }
 
     /**
@@ -77,7 +77,7 @@ public class Libro{
      * @return Una stringa che rappresenta le valutazioni e i commenti sul libro.
      */
     public static String leggiValutazione(Libro libro){
-        String filePath = new File("ValutazioniLibri.dati.csv").getAbsolutePath();
+        String filePath = new File("../data/ValutazioniLibri.dati.csv").getAbsolutePath();
         boolean isFirstLine = true;
         ArrayList<String> noteStile = new ArrayList<String>();
         ArrayList<String> noteContenuto = new ArrayList<String>();
@@ -172,7 +172,7 @@ public class Libro{
      * @return Una stringa che rappresenta i consigli sul libro.
      */
     public static String leggiConsigli(Libro libro){
-        String filePath = new File("ConsigliLibri.dati.csv").getAbsolutePath();
+        String filePath = new File("../data/ConsigliLibri.dati.csv").getAbsolutePath();
         boolean isFirstLine = true;
         ArrayList<Integer> conta = new ArrayList<Integer>();
         ArrayList<String> advice = new ArrayList<String>();
