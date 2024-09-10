@@ -1,11 +1,34 @@
+/**
+ * CercaLibro.java
+ * 
+ * Questa classe implementa un'interfaccia grafica (GUI) per cercare libri 
+ * basati su diversi criteri come titolo, autore e anno di pubblicazione.
+ * La classe gestisce le azioni dell'utente per la ricerca di libri in base 
+ * ai criteri forniti e mostra i risultati corrispondenti.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*; 
 import java.util.*;
 
+
+/**
+ * La classe CercaLibro crea una GUI per consentire agli utenti di cercare libri
+ * per titolo, autore o una combinazione di autore e anno. Implementa ActionListener
+ * per gestire le azioni dell'utente.
+ */
+
+
 public class CercaLibro implements ActionListener{
 
+    // Componenti della GUI
 	JTextField titolo;
     JTextField autore;
     JTextField autoreA;
@@ -15,6 +38,10 @@ public class CercaLibro implements ActionListener{
     Libreria libreria;
     JLabel label;
 
+    /**
+     * Costruttore predefinito che inizializza la finestra di ricerca del libro.
+     */
+
     public CercaLibro(){
         frame = new JFrame("Cerca Libro");
 		frame.setSize(1920, 1080);
@@ -22,6 +49,12 @@ public class CercaLibro implements ActionListener{
         frame.setVisible(true);
     }
 
+    /**
+     * Costruttore che inizializza la finestra di ricerca del libro con un utente e una libreria specificati.
+     * 
+     * @param utente  L'utente che utilizza l'applicazione.
+     * @param l       La libreria in cui effettuare la ricerca.
+     */
 	public CercaLibro(Utente utente, Libreria l){
 		u = utente;
         libreria=l;
@@ -77,7 +110,11 @@ public class CercaLibro implements ActionListener{
 		
 	}
 
-
+    /**
+     * Costruttore che inizializza la finestra di ricerca del libro con un utente specificato.
+     * 
+     * @param utente  L'utente che utilizza l'applicazione.
+     */
 	public CercaLibro(Utente utente){
 		u = utente;
         libreria = null;
@@ -131,11 +168,13 @@ public class CercaLibro implements ActionListener{
 		frame.setVisible(true);
 		
 	}
-	
-	public static void main(String[] args){
-		CercaLibro cerca = new CercaLibro();
-	}
-	
+
+    /**
+     * Metodo invocato quando viene eseguita un'azione nella GUI (es. clic su un pulsante).
+     * Gestisce le ricerche di libri per titolo, autore o autore e anno.
+     * 
+     * @param e L'evento di azione generato dall'utente.
+     */
 	@Override
     public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton) e.getSource();

@@ -1,3 +1,14 @@
+/**
+ * La classe Registrazione gestisce l'interfaccia grafica per la registrazione
+ * di nuovi utenti. Permette agli utenti di inserire i loro dati personali e 
+ * di registrarsi se tutte le informazioni sono valide e non esistono già.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -15,7 +26,11 @@ public class Registrazione implements ActionListener{
     JFrame registrazione;
     JLabel esistente ;
     JLabel riempi ;
-        
+    
+    /**
+     * Costruttore che crea la finestra di registrazione con i campi per inserire
+     * i dati dell'utente e i pulsanti per inviare i dati o tornare alla schermata principale.
+     */
     public Registrazione(){
 
         registrazione = new JFrame("Registrazione");
@@ -62,10 +77,11 @@ public class Registrazione implements ActionListener{
 
     }
 
-    public static void main(String[] args){
-		Registrazione registrazione = new Registrazione();
-	}
-
+    /**
+     * Gestisce gli eventi dei pulsanti nella finestra di registrazione.
+     *
+     * @param e L'evento di azione generato dal pulsante premuto.
+     */
     @Override
     public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton)e.getSource();
@@ -116,7 +132,13 @@ public class Registrazione implements ActionListener{
                 }
     }
 			
-
+    /**
+     * Verifica se un dato identificativo (username o email) esiste già nel file degli utenti registrati.
+     *
+     * @param id Il dato identificativo da verificare.
+     * @param colonna L'indice della colonna nel file CSV da controllare.
+     * @return true se il dato esiste già, false altrimenti.
+     */
     private static boolean esistenza(String id, int colonna){
         String filePath = new File("UtentiRegistrati.dati.csv").getAbsolutePath();
         boolean isFirstLine = true;

@@ -1,3 +1,16 @@
+/**
+ * La classe Consigli rappresenta un'interfaccia per consigliare libri.
+ * Permette all'utente di selezionare fino a tre libri consigliati
+ * da una libreria esistente e salvare queste informazioni in un file CSV.
+ * Implementa l'interfaccia ActionListener per gestire gli eventi dell'interfaccia utente.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+
+package bookrecommender;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -6,18 +19,38 @@ import java.util.*;
 
 public class Consigli implements ActionListener{
 
+     /** L'utente corrente */
     Utente u;
+
+    /** Combo box per selezionare i primi tre libri consigliati */
     JComboBox box1;
     JComboBox box2;
     JComboBox box3;
+
+     /** Libreria da cui vengono selezionati i libri consigliati */
     Libreria libreria; 
+
+    /** Finestra principale dell'interfaccia utente */
     JFrame frame;
+
+    /** Il libro attualmente selezionato per il consiglio */
     Libro l;
 
+    /**
+    * Costruttore predefinito che crea un frame vuoto.
+    */
     public Consigli(){
         JFrame frame = new JFrame();
     }
 
+
+    /**
+     * Costruttore che inizializza l'interfaccia per consigliare libri.
+     * 
+     * @param libro    Il libro selezionato
+     * @param bookshelf Libreria di riferimento
+     * @param utente   L'utente corrente
+     */
     public Consigli(Libro libro, Libreria bookshelf, Utente utente){
         u = utente;
         l = libro;
@@ -59,10 +92,12 @@ public class Consigli implements ActionListener{
         frame.setVisible(true);
     }
 
-    public static void main(String[] args){
-        Consigli c = new Consigli();
-    }
-
+    /**
+     * Metodo obbligatorio per implementare l'interfaccia ActionListener.
+     * Gestisce gli eventi dei pulsanti nell'interfaccia utente.
+     * 
+     * @param e L'evento che è stato generato
+     */
     @Override
     public void actionPerformed(ActionEvent e){
 		JButton pulsante = (JButton)e.getSource();  
@@ -85,6 +120,12 @@ public class Consigli implements ActionListener{
         }       
     }
     
+    /**
+     * Riempie una combo box con i titoli dei libri disponibili nella libreria,
+     * escludendo il titolo del libro attualmente selezionato.
+     * 
+     * @param boxino La combo box da riempire
+     */
     public void riempiCombo(JComboBox boxino){
         Libro[] elementi = libreria.getElencoLibri();
         boxino.addItem(" ");
@@ -95,6 +136,14 @@ public class Consigli implements ActionListener{
         }
     }
 
+    /**
+     * Inserisce i libri consigliati in un file CSV chiamato "ConsigliLibri.dati.csv".
+     * Verifica che i consigli selezionati siano validi (non vuoti e non duplicati)
+     * e scrive le informazioni nel file.
+     * 
+     * @param advice Array di stringhe contenente i libri consigliati
+     * @throws IOException Se si verifica un errore durante la scrittura nel file
+     */
     public void inserisciConsigli(String[] advice) throws IOException{
         File utentiRegistrati = new File("ConsigliLibri.dati.csv");
         try{

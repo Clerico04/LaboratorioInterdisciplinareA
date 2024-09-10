@@ -1,3 +1,14 @@
+/**
+ * La classe Valutazioni fornisce un'interfaccia utente per permettere agli utenti di valutare un libro in base a diversi criteri.
+ * Gli utenti possono inserire voti e giudizi per lo stile, il contenuto, la gradevolezza, l'originalità e l'edizione del libro,
+ * e il voto finale viene calcolato automaticamente come media degli altri voti.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -23,10 +34,19 @@ public class Valutazioni implements ActionListener{
     JTextField votoFinal = new JTextField("Il voto finale verrà calcolato come media degli altri voti", 25);
     JTextField giudizioFinale = new JTextField("Inserisci un giudizio complessivo per questo libro (massimo 256 caratteri)", 25);
 
+    /**
+     * Costruttore di default che inizializza la finestra delle valutazioni senza parametri.
+     */
     public Valutazioni(){
         frame = new JFrame();
     }
 
+    /**
+     * Costruttore che inizializza la finestra delle valutazioni per un libro specifico e un utente specifico.
+     *
+     * @param libro Il libro da valutare.
+     * @param utente L'utente che sta effettuando la valutazione.
+     */
     public Valutazioni(Libro libro, Utente utente){
         u = utente;
         l=libro;
@@ -67,10 +87,12 @@ public class Valutazioni implements ActionListener{
         frame.setVisible(true);
     }
 
-    public static void main(String[] args){
-        Valutazioni c = new Valutazioni();
-    }
-
+    /**
+     * Gestisce gli eventi generati dai pulsanti. Se viene cliccato il pulsante "Home", viene mostrata la schermata principale.
+     * Altrimenti, i dati di valutazione vengono raccolti e salvati.
+     *
+     * @param e L'evento generato dal pulsante cliccato.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 		JButton pulsante = (JButton)e.getSource();
@@ -104,6 +126,12 @@ public class Valutazioni implements ActionListener{
 	    }
     }
 
+    /**
+     * Verifica se una stringa rappresenta un numero intero valido.
+     *
+     * @param str La stringa da verificare.
+     * @return true se la stringa è un numero intero, altrimenti false.
+     */
     public static boolean isNumeric(String str) { 
         try {
             Integer.parseInt(str);
@@ -113,6 +141,22 @@ public class Valutazioni implements ActionListener{
         }
     }
 
+    /**
+     * Inserisce le valutazioni del libro nel file delle valutazioni.
+     *
+     * @param votoS Voto per lo stile.
+     * @param giudizioS Giudizio per lo stile.
+     * @param votoC Voto per il contenuto.
+     * @param giudizioC Giudizio per il contenuto.
+     * @param votoG Voto per la gradevolezza.
+     * @param giudizioG Giudizio per la gradevolezza.
+     * @param votoO Voto per l'originalità.
+     * @param giudizioO Giudizio per l'originalità.
+     * @param votoE Voto per l'edizione.
+     * @param giudizioE Giudizio per l'edizione.
+     * @param votoF Voto finale calcolato come media.
+     * @param giudizioF Giudizio complessivo per il libro.
+     */
     public void inserisciValutazioni(String votoS, String giudizioS, String votoC, String giudizioC, String votoG, String giudizioG, String votoO, String giudizioO, String votoE, String giudizioE, String votoF, String giudizioF){
                 File utentiRegistrati = new File("ValutazioniLibri.dati.csv");
                 try{

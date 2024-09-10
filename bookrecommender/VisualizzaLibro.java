@@ -1,3 +1,14 @@
+/**
+ * La classe VisualizzaLibro fornisce un'interfaccia utente per visualizzare i dettagli di un libro specifico.
+ * Gli utenti possono visualizzare informazioni generali sul libro, i dettagli, aggiungere il libro alla libreria, 
+ * inserire consigli e valutazioni, e navigare verso la schermata principale.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -14,10 +25,19 @@ public class VisualizzaLibro implements ActionListener{
     JLabel noRegistrato = new JLabel();
     JTextArea textArea;
 
+    /**
+     * Costruttore di default che inizializza una finestra di visualizzazione del libro senza parametri.
+     */
     public VisualizzaLibro(){
         JFrame frame = new JFrame();
     }
 
+    /**
+     * Costruttore che inizializza la finestra per visualizzare le informazioni di un libro specifico per un utente specifico.
+     *
+     * @param utente L'utente che sta visualizzando il libro.
+     * @param l Il libro da visualizzare.
+     */
     public VisualizzaLibro(Utente utente, Libro l){
         u = utente;
         det = new JLabel();
@@ -59,7 +79,13 @@ public class VisualizzaLibro implements ActionListener{
         frameV.setVisible(true);
     }
 
-
+    /**
+     * Costruttore che inizializza la finestra per visualizzare un libro e permette anche di gestire la libreria.
+     *
+     * @param utente L'utente che sta visualizzando il libro.
+     * @param l Il libro da visualizzare.
+     * @param libreria La libreria a cui appartiene il libro.
+     */
     public VisualizzaLibro(Utente utente, Libro l, Libreria libreria){
         u = utente;
         det = new JLabel();
@@ -111,19 +137,16 @@ public class VisualizzaLibro implements ActionListener{
         frameV.setVisible(true);
     }
 
-    public static void main(String[] args){
-        VisualizzaLibro visualizza = new VisualizzaLibro();
-    }
-
-
+    /**
+     * Gestisce gli eventi generati dai pulsanti. Permette di visualizzare dettagli aggiuntivi, tornare alla schermata principale, 
+     * inserire consigli o valutazioni, e aggiungere il libro alla libreria.
+     *
+     * @param e L'evento generato dal pulsante cliccato.
+     */
     @Override
     public void actionPerformed(ActionEvent e){
 		JButton pulsante = (JButton)e.getSource();  
         if(pulsante.getText().equals("Dettagli")){
-           /*det.setFont(new Font("Arial", Font.PLAIN, 20));
-            det.setText("");
-            det.setText(Libro.leggiValutazione(libro));
-            det.setText(det.getText() + " Libri Consigliati: " + Libro.leggiConsigli(libro));*/
             textArea.setText(Libro.leggiValutazione(libro) + " CONSIGLI: " + Libro.leggiConsigli(libro));
             frameV.validate();
             frameV.repaint();
@@ -162,6 +185,13 @@ public class VisualizzaLibro implements ActionListener{
         }    
     }
     
+    /**
+     * Modifica il file della libreria aggiungendo un libro alla libreria esistente.
+     *
+     * @param nomeFile Il nome del file della libreria da modificare.
+     * @param chiavi Chiavi per identificare la libreria.
+     * @param book Il libro da aggiungere alla libreria.
+     */
     public static void modificaLibreria(String nomeFile, String[] chiavi, Libro book){
         ArrayList<String> righe = new ArrayList<String>();
         boolean rigaModificata = false;
@@ -196,6 +226,12 @@ public class VisualizzaLibro implements ActionListener{
         }
     } 
 
+    /**
+     * Controlla se un libro con un titolo specifico esiste già nella libreria.
+     *
+     * @param titolone Il titolo del libro da cercare.
+     * @return True se il libro esiste nella libreria, altrimenti false.
+     */
     public boolean existence(String titolone){
         Libro[] el = lib.getElencoLibri();
         for(Libro j:el){

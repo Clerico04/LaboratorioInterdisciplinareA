@@ -1,3 +1,13 @@
+/**
+ * La classe LibreriaGUI gestisce l'interfaccia grafica per visualizzare e creare librerie dell'utente.
+ * Consente di visualizzare le librerie esistenti, creare nuove librerie e tornare alla schermata principale.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -9,10 +19,18 @@ public class LibreriaGUI implements ActionListener{
     Utente u;
     JFrame frameL;
 
+    /**
+     * Costruttore di default che crea una finestra vuota.
+     */
     public LibreriaGUI(){
         JFrame f = new JFrame();
     }
 
+    /**
+     * Costruttore che crea l'interfaccia grafica per gestire le librerie di un utente.
+     *
+     * @param utente L'utente per il quale visualizzare e gestire le librerie.
+     */
     public LibreriaGUI (Utente utente){
         u = utente;
 
@@ -42,14 +60,14 @@ public class LibreriaGUI implements ActionListener{
         }        
         
         frameL.setVisible(true);
-    }
-  
-    public static void main(String[] args){
-        Libreria libreria = new Libreria();
-    }
-
+    } 
     
-    
+    /**
+     * Gestisce gli eventi di azione, come la creazione di una libreria, il ritorno alla home, 
+     * e la visualizzazione di una libreria selezionata.
+     *
+     * @param e L'evento di azione che si è verificato.
+     */
     @Override
     public void actionPerformed(ActionEvent e){
 		JButton pulsante = (JButton)e.getSource();
@@ -70,6 +88,12 @@ public class LibreriaGUI implements ActionListener{
         }
 	}
 
+    /**
+     * Legge le librerie associate a un determinato utente da un file di dati.
+     *
+     * @param utente L'utente di cui leggere le librerie.
+     * @return Una lista di oggetti Libreria associati all'utente.
+     */
     public ArrayList<Libreria> leggiLibrerie(Utente utente){
         String filePath = new File("Librerie.dati.csv").getAbsolutePath();
 		boolean isFirstLine = true;
@@ -99,6 +123,12 @@ public class LibreriaGUI implements ActionListener{
         return arg; 
     }
 
+    /**
+     * Cerca un libro per titolo leggendo da un file di dati.
+     *
+     * @param titolo Il titolo del libro da cercare.
+     * @return Un oggetto Libro se trovato, altrimenti null.
+     */
     public Libro trovaLibroTitolo (String titolo){
         String filePath = new File("Libri.dati.csv").getAbsolutePath();
         boolean isFirstLine = true;

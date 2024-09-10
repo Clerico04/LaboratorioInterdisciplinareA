@@ -1,3 +1,14 @@
+/**
+ * La classe ListaLibri gestisce l'interfaccia grafica per visualizzare una lista di libri.
+ * Permette di navigare tra i libri con pulsanti per visualizzare il libro corrente,
+ * passare al libro successivo o precedente, e tornare alla schermata principale.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -13,6 +24,9 @@ public class ListaLibri implements ActionListener{
     Libreria libreria;
     JFrame finestra;
 
+    /**
+     * Costruttore che crea una finestra di login con dimensioni predefinite.
+     */
 	public ListaLibri(){
 		finestra = new JFrame("Login");
 		finestra.setSize(1920, 1080);
@@ -20,6 +34,13 @@ public class ListaLibri implements ActionListener{
 		finestra.setVisible(true);
 	}
 
+    /**
+     * Costruttore che crea una finestra per visualizzare una lista di libri e permette di navigare tra di essi.
+     *
+     * @param arg      La lista di libri da visualizzare.
+     * @param utente   L'utente attualmente loggato.
+     * @param libreria La libreria a cui i libri appartengono.
+     */
     public ListaLibri(ArrayList<Libro> arg, Utente utente, Libreria l){
         u = utente;
         libreria = l;
@@ -57,6 +78,12 @@ public class ListaLibri implements ActionListener{
 		finestra.setVisible(true);
 	}
 
+    /**
+     * Costruttore che crea una finestra per visualizzare una lista di libri senza libreria associata.
+     *
+     * @param arg    La lista di libri da visualizzare.
+     * @param utente L'utente attualmente loggato.
+     */
     public ListaLibri(ArrayList<Libro> arg, Utente utente){
         u = utente;
 
@@ -93,10 +120,11 @@ public class ListaLibri implements ActionListener{
 		finestra.setVisible(true);
 	}
 	
-	public static void main(String[] args){
-		Login ListaLibri = new Login();
-	}
-	
+    /**
+     * Gestisce gli eventi dei pulsanti nella finestra.
+     *
+     * @param e L'evento di azione generato dal pulsante premuto.
+     */
 	@Override
     public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton)e.getSource();

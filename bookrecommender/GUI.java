@@ -1,3 +1,14 @@
+/**
+ * La classe GUI rappresenta l'interfaccia utente principale per l'applicazione di raccomandazione di libri.
+ * Fornisce un menu principale con opzioni per il login, la registrazione, la ricerca di libri e la gestione delle librerie.
+ * Implementa l'interfaccia ActionListener per gestire gli eventi dei pulsanti.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*; 
@@ -5,10 +16,18 @@ import java.io.*;
 
 public class GUI implements ActionListener{
 	
+	/** Etichetta del titolo principale del progetto */
 	JLabel titolo;
+
+	 /** Finestra principale dell'interfaccia utente */
 	JFrame home;
+
+	 /** L'utente corrente che utilizza l'interfaccia */
 	Utente u;
 	
+	/**
+    * Costruttore predefinito che inizializza l'interfaccia utente per utenti non registrati.
+    */
 	public GUI(){
 		u= new Utente();
 
@@ -48,6 +67,11 @@ public class GUI implements ActionListener{
         home.setVisible(true);
 	}
 	
+	/**
+    * Costruttore che inizializza l'interfaccia utente per un utente registrato.
+    *
+    * @param utente L'utente corrente registrato
+    */
 	public GUI(Utente utente){
 		u = utente;
 		
@@ -84,10 +108,12 @@ public class GUI implements ActionListener{
         home.setVisible(true);	
 	}
 
-    public static void main(String[] args){
-		GUI gui = new GUI();
-    }
-
+	/**
+     * Metodo obbligatorio per implementare l'interfaccia ActionListener.
+     * Gestisce gli eventi dei pulsanti nell'interfaccia utente.
+     *
+     * @param e L'evento che è stato generato
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 		JButton pulsante = (JButton)e.getSource();

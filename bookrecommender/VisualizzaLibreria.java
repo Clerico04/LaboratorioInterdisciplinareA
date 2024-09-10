@@ -1,3 +1,13 @@
+/**
+ * La classe VisualizzaLibreria fornisce un'interfaccia utente per visualizzare e gestire i libri all'interno di una libreria.
+ * Gli utenti possono vedere un elenco dei libri, aggiungere nuovi libri e visualizzare i dettagli di un libro selezionato.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -11,10 +21,19 @@ public class VisualizzaLibreria implements ActionListener{
     Libreria libreria;
     JFrame frameV;
 
+     /**
+     * Costruttore di default che inizializza una finestra di visualizzazione della libreria senza parametri.
+     */
     public VisualizzaLibreria(){
         JFrame f = new JFrame();
     }
 
+    /**
+     * Costruttore che inizializza la finestra per visualizzare i libri di una libreria specifica per un utente specifico.
+     *
+     * @param nome Il nome della libreria da visualizzare.
+     * @param utente L'utente che sta visualizzando la libreria.
+     */
     public VisualizzaLibreria(String nome, Utente utente){
         u = utente;
 
@@ -47,10 +66,12 @@ public class VisualizzaLibreria implements ActionListener{
         frameV.setVisible(true);
     }
 
-    public static void main(String[] args){
-        VisualizzaLibreria l = new VisualizzaLibreria();
-    }
-
+    /**
+     * Gestisce gli eventi generati dai pulsanti. Permette di tornare alla schermata principale, aggiungere un nuovo libro
+     * o visualizzare i dettagli di un libro selezionato.
+     *
+     * @param e L'evento generato dal pulsante cliccato.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 		JButton pulsante = (JButton)e.getSource();

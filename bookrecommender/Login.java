@@ -1,3 +1,14 @@
+/**
+ * La classe Login gestisce l'interfaccia grafica per il login degli utenti.
+ * Fornisce un modulo per inserire nome utente e password e verifica
+ * le credenziali contro un file di utenti registrati.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -9,10 +20,14 @@ public class Login implements ActionListener{
 	JTextField password;
 	JFrame login;
 	
+	/**
+     * Costruttore che crea la finestra di login con i campi per inserire
+     * nome utente e password e i pulsanti per effettuare il login o tornare alla schermata principale.
+     */
 	public Login(){
 		
 		login = new JFrame("Login");
-		login.setSize(960, 540);
+		login.setSize(1920, 1080);
 		login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		login.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
@@ -42,10 +57,11 @@ public class Login implements ActionListener{
 		
 	}
 	
-	public static void main(String[] args){
-		Login l = new Login();
-	}
-	
+	/**
+     * Gestisce gli eventi dei pulsanti nella finestra di login.
+     *
+     * @param e L'evento di azione generato dal pulsante premuto.
+     */
 	@Override
     public void actionPerformed(ActionEvent e){
 			JButton pulsante = (JButton)e.getSource();
@@ -70,6 +86,7 @@ public class Login implements ActionListener{
 							GUI gui = new GUI(utente);
 							login.dispose();
 						}else{
+							// If no valid user found
 							nome.setText("");
 							password.setText("");
 							JLabel sbagliato = new JLabel("");

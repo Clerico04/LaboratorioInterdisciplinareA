@@ -1,3 +1,13 @@
+/**
+ * La classe Libro rappresenta un libro con informazioni come titolo, autore, anno di pubblicazione ed editore.
+ * Fornisce metodi per confrontare libri, stampare informazioni, leggere valutazioni e consigli da file esterni.
+ * 
+ * @author LucaClerici756176CO
+ * @author AlessandroMonaci757003CO
+ * @version 1.0
+ */
+
+package bookrecommender;
 import java.io.*;
 import java.util.*;
 
@@ -7,6 +17,14 @@ public class Libro{
     private String anno;
     private String editore;
 
+    /**
+     * Costruttore che crea un oggetto Libro con le informazioni specificate.
+     *
+     * @param titolo  Il titolo del libro.
+     * @param autore  L'autore del libro.
+     * @param anno    L'anno di pubblicazione del libro.
+     * @param editore L'editore del libro.
+     */
     public Libro(String titolo, String autore, String anno, String editore){
         this.titolo = titolo;
         this.autore = autore;
@@ -14,6 +32,9 @@ public class Libro{
         this.editore = editore;
     }
 
+    /**
+     * Costruttore di default che crea un oggetto Libro con informazioni vuote.
+     */
     public Libro(){
         this.titolo = "";
         this.autore = "";
@@ -21,18 +42,40 @@ public class Libro{
         this.editore = "";
     }
 
+    /**
+     * Confronta questo libro con un altro libro per verificare se sono uguali.
+     *
+     * @param altro Il libro da confrontare.
+     * @return true se i libri hanno lo stesso titolo, autore, anno ed editore; false altrimenti.
+     */
     public boolean equals(Libro homosexual){
         return ((this.titolo.equals(homosexual.titolo)) && (this.autore.equals(homosexual.autore)) && (this.anno.equals(homosexual.anno)) && (this.editore.equals(homosexual.editore)));
     }
 
+    /**
+     * Restituisce una stringa che rappresenta le informazioni del libro.
+     *
+     * @return Una stringa contenente il titolo, l'autore, l'anno di pubblicazione e l'editore del libro.
+     */
     public String stampaLibro(){
         return("TITOLO: " + this.titolo + " AUTORE: " + this.autore + " ANNO PUBBLICAZIONE: " + this.anno + " EDITORE: " + this.editore);
     }
 
+    /**
+     * Restituisce il titolo del libro.
+     *
+     * @return Il titolo del libro.
+     */
     public String getTitolo(){
         return this.titolo;
     }
 
+    /**
+     * Legge le valutazioni del libro da un file esterno e restituisce un riassunto delle valutazioni.
+     *
+     * @param libro Il libro di cui leggere le valutazioni.
+     * @return Una stringa che rappresenta le valutazioni e i commenti sul libro.
+     */
     public static String leggiValutazione(Libro libro){
         String filePath = new File("ValutazioniLibri.dati.csv").getAbsolutePath();
         boolean isFirstLine = true;
@@ -108,6 +151,12 @@ public class Libro{
         return "Libro non ancora valutato, sii il primo! " + "/n";
     }
 
+    /**
+     * Converte una lista di commenti in una stringa formattata.
+     *
+     * @param ar La lista di commenti.
+     * @return Una stringa contenente tutti i commenti concatenati.
+     */
     public static String leggiList(ArrayList<String> ar){
         String unita="";
         for(String s:ar){
@@ -116,6 +165,12 @@ public class Libro{
         return unita;
     }
 
+    /**
+     * Legge i consigli sul libro da un file esterno e restituisce un riassunto dei consigli.
+     *
+     * @param libro Il libro di cui leggere i consigli.
+     * @return Una stringa che rappresenta i consigli sul libro.
+     */
     public static String leggiConsigli(Libro libro){
         String filePath = new File("ConsigliLibri.dati.csv").getAbsolutePath();
         boolean isFirstLine = true;
